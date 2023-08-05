@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const Layout: React.FC = () => {
-  return <div>Layout</div>
+  return <img>Layout</img>
 }
 
 export default Layout
