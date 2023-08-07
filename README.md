@@ -21,3 +21,36 @@ Basket page 🛒
 About Us page 🙋‍♂️🙋‍♀️
 The application is powered by CommerceTools 🌐, a leading provider of commerce solutions for B2C and B2B enterprises. CommerceTools offers a cloud-native, microservices-based commerce platform that enables brands to create unique and engaging digital commerce experiences.
 [Link to the task](https://github.com/rolling-scopes-school/tasks/tree/master/tasks/eCommerce-Application)
+
+## Technology stack:
+- React
+- TypeScript
+- Vite
+- CSS3
+- HTML5
+
+## Project installation:
+
+Clone repository:
+
+    https://github.com/Zixail28/RSS-eCommerce.git
+
+Go to RSS-eCommerce folder:
+
+    cd RSS-eCommerce
+
+Install dependencies:
+
+    npm install
+
+Start project:
+
+    npm run dev 
+
+
+## Screenshot:
+Not yet
+</details>
+
+## Deploy:
+Not yet
