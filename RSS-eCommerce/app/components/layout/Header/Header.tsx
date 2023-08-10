@@ -3,7 +3,6 @@ import styles from "./Header.module.scss";
 import NavBar from "./NavBar/NavBar";
 import Search from "../../Search/Search";
 import { Link } from "react-router-dom";
-throw new Error('few')
 const Header: FC<{ classes: string }> = ({ classes }) => {
   return (
     <header className={`${styles.header} ${classes}`}>
