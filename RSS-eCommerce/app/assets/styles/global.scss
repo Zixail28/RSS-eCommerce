@@ -10,3 +10,21 @@
   font-weight: bold;
   line-height: 1.5rem;
 }
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-size: 1rem;
+}
