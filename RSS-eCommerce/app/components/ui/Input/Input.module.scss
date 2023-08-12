@@ -1,0 +1,31 @@
+.input {
+  color: #5c5c5c;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #5c5c5c;
+  padding: 5px;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.input__wrapper {
+  position: relative;
+}
+
+.input__error {
+  position: absolute;
+  margin-top: 0.25rem;
+  color: #db4444;
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  width: 300px;
+}
+
+.password__icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
