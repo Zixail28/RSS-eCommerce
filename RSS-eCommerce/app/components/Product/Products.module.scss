@@ -1,0 +1,145 @@
+.products {
+  margin-top: 1rem;
+}
+
+.title{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.title img {
+  margin-right: 0.5rem;
+}
+
+.title p {
+  color: red;
+}
+
+.products h2 {
+  margin: 1.5rem 0;
+}
+ 
+.list {
+  margin-top: 24px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.list a {
+  text-decoration: none;
+  color: black;
+}
+  
+.product {
+  background: var(--bg);
+  border-radius: 8px;
+  overflow: hidden;
+  width: calc(100% / 5 - 20px);
+}
+
+.wrapper {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 410px);
+}
+  
+.info {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+  
+.prices {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+  
+.price {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--violet-dark);
+}
+  
+.oldPrice {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  text-decoration-line: line-through;
+  color: var(--dark-sea);
+}
+  
+.purchases {
+  color: var(--dark-sea);
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.image {
+  width: 100%;
+  height: 210px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.titleImg {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.heart {
+  display: flex;
+  width: 10%;
+  flex-wrap: wrap;
+}
+
+.heart img {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.discount {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  list-style: none;
+  width: 45px;
+}
+
+.discount span {
+  font-size: 10px; 
+}
+
+.picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.button {
+  display: none;    
+  width: 100%;
+  background-color: black;
+  color: white;
+  justify-content: center;
+  font-weight: normal;    
+}
+
+.product:hover .button {
+  display: flex;
+}
