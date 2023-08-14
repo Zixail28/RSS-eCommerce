@@ -1,14 +1,30 @@
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
 import Button from '../../components/ui/Button/Button';
 import Input from '../../components/ui/Input/Input';
 import style from '../Login/Login.module.scss';
 import authImg from '../../assets/images/auth.jpg';
+import { authenticate } from '../../services/auth/authThunk';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 const Login: FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
+
+  const { isAuth } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate('/');
+      toast.success('You logged in');
+    }
+  }, [isAuth, navigate]);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = e.target.value;
@@ -40,22 +56,23 @@ const Login: FC = () => {
     return emailRegex.test(email);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (password.trim() === '') {
-      setPasswordError('Password is required.');
-    }
-
-    if (email.trim() === '') {
-      setEmailError('Email is required.');
-    }
-  };
-
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
     validatePassword(newPassword);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (email.trim() === '' && password.trim() === '') {
+      setPasswordError('Password is required.');
+      setEmailError('Email is required.');
+
+      return;
+    }
+
+    dispatch(authenticate({ email, password }));
   };
 
   const validatePassword = (password: string) => {

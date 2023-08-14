@@ -1,7 +1,8 @@
-import { FC } from 'react'
+import { FC } from 'react';
+import style from '../Home/Home.module.scss';
 
 const Home: FC = () => {
-  return <div>Home</div>
-}
+  return <div className={style.wrapper}>Home</div>;
+};
 
-export default Home
+export default Home;
