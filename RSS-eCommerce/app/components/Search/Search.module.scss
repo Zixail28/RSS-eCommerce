@@ -7,3 +7,11 @@
 
   font-weight: 400;
 }
+
+@media (max-width: 370px) {
+  .search {
+    padding: .5rem;
+    width: 160px;
+    font-size: 12px;
+  }
+}

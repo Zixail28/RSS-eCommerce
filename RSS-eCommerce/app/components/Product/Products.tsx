@@ -11,9 +11,12 @@ interface ProductsProps {
   products: Product[];
   title: string;
   titlePeriod: string;
+  amount: number;
 }
   
-const Products: FC<ProductsProps> = ({ products, title, titlePeriod }) => {
+const Products: FC<ProductsProps> = ({ products, title, titlePeriod, amount }) => {
+  const list = products.filter((_, i) => i < amount);
+
   return (
     <section className={styles.products}>
       <div className={styles.title}>
@@ -22,42 +25,46 @@ const Products: FC<ProductsProps> = ({ products, title, titlePeriod }) => {
       </div>
       <h2>{title}</h2>
       <div className={styles.list}>
-        {products.map(({ id, images, name, price, priceOld }) => {
-          const percentDiscount = (price * 100) / priceOld; // Рассчет процента скидки
-          return (
-            <Link to={`/products/${id}`} key={id} className={styles.product}>
-              <div className={styles.image}>
-                <div className={styles.titleImg}>
-                  <div className={styles.discount}>
-                    <span>-{percentDiscount.toFixed(2)}%</span>
-                  </div>  
-                  <div className={styles.heart}>
-                    <img src={heart} alt="Heart" />
-                    <img src={view} alt="Quick view" />
-                  </div>  
-                </div>
-                <div className={styles.picture}>
-                  <img src={images} alt="Product" width="60%" /> 
-                </div>
-                <button className={styles.button}>Add To Cart</button>
-              </div>
+        {list.map(({ id, images, name, price, priceOld }) => {
+          const percentDiscount = (price * 100) / priceOld;
 
-              <div className={styles.wrapper}>
-                <h3 className={styles.name}>{name}</h3>
-                <div className={styles.info}>
-                  <div className={styles.prices}>
-                    <div className={styles.price}>{price}$</div>
-                    <div className={styles.oldPrice}>
-                      {Math.floor(price * 0.8)}$
+          return (
+            <div className={styles.product} key={id}>
+              <div className={styles.titleImg}>
+                <div className={styles.discount}>
+                  <span>-{percentDiscount.toFixed(2)}%</span>
+                </div>
+                <div className={styles.heart}>
+                  <img src={heart} alt="Heart" />
+                  <img src={view} alt="Quick view" />
+                </div>
+              </div>
+            
+              <Link to={`/products/${id}`} key={id} className={styles.product}>
+                <div className={styles.image}>
+                  <div className={styles.picture}>
+                    <img src={images} alt="Product" width="60%" /> 
+                  </div>
+                  <button className={styles.button}>Add To Cart</button>
+                </div>
+
+                <div className={styles.wrapper}>
+                  <h3 className={styles.name}>{name}</h3>
+                  <div className={styles.info}>
+                    <div className={styles.prices}>
+                      <div className={styles.price}>{price}$</div>
+                      <div className={styles.oldPrice}>
+                        {Math.floor(price * 0.8)}$
+                      </div>
+                    </div>
+
+                    <div className={styles.purchases}>
+                      {Math.floor(Math.random() * 20 + 1)} purchased
                     </div>
                   </div>
-
-                  <div className={styles.purchases}>
-                    {Math.floor(Math.random() * 20 + 1)} purchased
-                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           );
         })}  
       </div>

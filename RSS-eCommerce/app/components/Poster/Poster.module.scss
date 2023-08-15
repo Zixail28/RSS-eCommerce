@@ -1,3 +1,7 @@
+.poster {
+  width: 100%;
+}
+
 .product {
   background-color: black;
   color: white; 
@@ -48,4 +52,17 @@
   display: flex;
   justify-content: center;
   align-items: center; 
+}
+
+@media (max-width: 750px) {
+  .picture {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .price h1 {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
 }
