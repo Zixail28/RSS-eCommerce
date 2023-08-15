@@ -3,28 +3,26 @@ import { InputProps } from '../../../shared/interfaces/input.interface';
 import style from '../Input/Input.module.scss';
 
 const Input: FC<InputProps> = ({
-  onChange,
-  value,
   type = 'text',
   placeholder = '',
-  onBlur,
   error,
+  onChange,
+  onBlur,
   showPasswordIcon = false,
 }) => {
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [inputType, setInputType] = useState(type);
 
   const togglePasswordVisibility = () => {
-    setIsPasswordVisible(!isPasswordVisible);
+    setInputType((prevType) => (prevType === 'password' ? 'text' : 'password'));
   };
 
   return (
     <div className={style.input__wrapper}>
       <input
         className={style.input}
-        value={value}
-        onChange={onChange}
         placeholder={placeholder}
-        type={isPasswordVisible ? 'text' : type}
+        type={inputType}
+        onChange={(e) => onChange(e.target.value)}
         onBlur={onBlur}
       />
       {showPasswordIcon && (
@@ -32,7 +30,7 @@ const Input: FC<InputProps> = ({
           className={style.password__icon}
           onClick={togglePasswordVisibility}
         >
-          {isPasswordVisible ? '🙈' : '👁️'}
+          {inputType === 'password' ? '🙈' : '👁️'}
         </div>
       )}
       {error && <p className={style.input__error}>{error}</p>}

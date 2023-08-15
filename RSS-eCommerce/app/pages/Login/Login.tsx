@@ -7,15 +7,25 @@ import { authenticate } from '../../services/auth/authThunk';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { SubmitHandler, useForm, Controller } from 'react-hook-form';
+import { validateEmail } from '../../utils/validate/validateEmail';
+import { validatePassword } from '../../utils/validate/validatePassword';
+
+interface LoginForm {
+  email: string;
+  password: string;
+}
 
 const Login: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<LoginForm>({
+    mode: 'onChange',
+  });
 
   const { isAuth } = useAppSelector((state) => state.auth);
 
@@ -26,79 +36,10 @@ const Login: FC = () => {
     }
   }, [isAuth, navigate]);
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newEmail = e.target.value;
-    setEmail(newEmail);
+  const onSubmit: SubmitHandler<LoginForm> = async (data) => {
+    const { email, password } = data;
 
-    if (!isValidEmail(newEmail)) {
-      if (!email.includes('@')) {
-        setEmailError('Email address must contain an "@" symbol.');
-      } else if (!email.trim()) {
-        setEmailError(
-          'Email address must not contain leading or trailing whitespace.'
-        );
-      } else if (email.includes(' ')) {
-        setEmailError('Email address must not contain spaces.');
-      } else if (!email.endsWith('.')) {
-        setEmailError(
-          'Email address must contain a valid domain name (e.g., example.com).'
-        );
-      } else {
-        setEmailError('Email address is not valid.');
-      }
-    } else {
-      setEmailError('');
-    }
-  };
-
-  const isValidEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newPassword = e.target.value;
-    setPassword(newPassword);
-    validatePassword(newPassword);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (email.trim() === '' && password.trim() === '') {
-      setPasswordError('Password is required.');
-      setEmailError('Email is required.');
-
-      return;
-    }
-
-    dispatch(authenticate({ email, password }));
-  };
-
-  const validatePassword = (password: string) => {
-    if (password.trim() === '') {
-      setPasswordError('Password is required.');
-    } else if (password.length < 8) {
-      setPasswordError('Password must be at least 8 characters.');
-    } else if (!/[A-Z]/.test(password)) {
-      setPasswordError(
-        'Password must contain at least one uppercase letter (A-Z).'
-      );
-    } else if (!/[a-z]/.test(password)) {
-      setPasswordError(
-        'Password must contain at least one lowercase letter (a-z).'
-      );
-    } else if (!/\d/.test(password)) {
-      setPasswordError('Password must contain at least one digit (0-9).');
-    } else if (!/[!@#$%^&*]/.test(password)) {
-      setPasswordError('Password must contain at least one special character.');
-    } else if (password !== password.trim()) {
-      setPasswordError(
-        'Password must not contain leading or trailing whitespace.'
-      );
-    } else {
-      setPasswordError('');
-    }
+    await dispatch(authenticate({ email, password }));
   };
 
   return (
@@ -108,27 +49,53 @@ const Login: FC = () => {
         <div className={style.login__wrapper}>
           <h1 className={style.login__title}>Log in to Exclusive</h1>
           <p className={style.login__subtitle}>Enter your details below</p>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className={style.input}>
-              <Input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={handleEmailChange}
-                error={emailError}
+              <Controller
+                name="email"
+                control={control}
+                rules={{
+                  required: 'Email is required',
+                  validate: validateEmail,
+                }}
+                render={({ field }) => (
+                  <>
+                    <Input
+                      {...field}
+                      type="text"
+                      placeholder="Email"
+                      value={field.value}
+                      error={errors.email?.message}
+                      onChange={(newValue: string) => field.onChange(newValue)}
+                      onBlur={field.onBlur}
+                    />
+                  </>
+                )}
               />
             </div>
             <div className={style.input}>
-              <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={handlePasswordChange}
-                error={passwordError}
-                showPasswordIcon={true}
+              <Controller
+                name="password"
+                control={control}
+                rules={{
+                  required: 'Password is required',
+                  validate: validatePassword,
+                }}
+                render={({ field }) => (
+                  <>
+                    <Input
+                      {...field}
+                      type="password"
+                      placeholder="Password"
+                      showPasswordIcon={true}
+                      error={errors.password?.message}
+                      onChange={(newValue: string) => field.onChange(newValue)}
+                    />
+                  </>
+                )}
               />
             </div>
-            <Button text="Log in" type="submit"></Button>
+            <Button type="submit">Log in</Button>
           </form>
         </div>
       </div>

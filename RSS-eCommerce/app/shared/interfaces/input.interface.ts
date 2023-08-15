@@ -1,9 +1,9 @@
-export interface InputProps {
-  value?: string;
+export type InputProps = {
   type: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
-  onBlur?: () => void;
+  placeholder: string;
   error?: string;
   showPasswordIcon?: boolean;
-}
+  value: string;
+  onChange: (newValue: string) => void;
+  onBlur: () => void;
+};
