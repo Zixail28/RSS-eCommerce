@@ -52,14 +52,16 @@ export const authenticate = createAsyncThunk<
     );
 
     return response.data;
-  } catch (error) {
-    const errorMessage =
-      error.response?.data?.message ??
-      'An error occurred during authentication.';
+  } catch (e) {
+    const error = e as ApiError;
 
     if (error.response.data.statusCode === 400) {
       toast.error('email or password is incorrect');
     }
+
+    const errorMessage =
+      error.response?.data?.message ??
+      'An error occurred during authentication.';
 
     return thunkAPI.rejectWithValue(errorMessage);
   }

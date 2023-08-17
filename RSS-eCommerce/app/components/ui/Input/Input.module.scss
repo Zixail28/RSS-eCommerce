@@ -8,11 +8,21 @@
   font-weight: 400;
 }
 
-.input__wrapper {
-  position: relative;
+.error__input {
+  border-bottom: 1px solid red;
 }
 
-.input__error {
+.input__wrapper {
+  position: relative;
+  margin: 0 0 2.5rem 0;
+  width: calc(50% - 1rem);
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.error {
   position: absolute;
   margin-top: 0.25rem;
   color: #db4444;

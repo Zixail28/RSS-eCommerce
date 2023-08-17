@@ -1,9 +1,13 @@
+import { ChangeEvent, FocusEvent } from 'react';
+
 export type InputProps = {
   type: string;
-  placeholder: string;
+  id?: string;
+  placeholder?: string;
   error?: string;
+  checked?: boolean;
   showPasswordIcon?: boolean;
-  value: string;
-  onChange: (newValue: string) => void;
-  onBlur: () => void;
+  value?: string | boolean;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
 };

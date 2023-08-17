@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { authenticate } from '../../services/auth/authThunk';
 import { RootState } from '../../store/store';
+import { register } from '../../services/auth/registerThunk';
 
 export interface AuthState {
   email: string | null;
@@ -23,6 +24,15 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(authenticate.fulfilled, (state, action) => {
       const payload = action.payload.customer;
+
+      state.email = payload.email;
+      state.firstName = payload.firstName;
+      state.lastName = payload.lastName;
+      state.isAuth = true;
+    });
+
+    builder.addCase(register.fulfilled, (state, action) => {
+      const payload = action.payload;
 
       state.email = payload.email;
       state.firstName = payload.firstName;

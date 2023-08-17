@@ -3,8 +3,8 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from '../../pages/Layout';
 import Home from '../../pages/Home/Home';
 import PageNotFound from '../../pages/PageNotFound/PageNotFound';
-import Login from '../../pages/Login/Login';
-import Register from '../../pages/Register/Register';
+import Login from '../../pages/Auth/Login';
+import Register from '../../pages/Auth/Register';
 
 function App() {
   return (
