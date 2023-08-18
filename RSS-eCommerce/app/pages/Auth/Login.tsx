@@ -1,16 +1,16 @@
-import { FC, useEffect } from 'react';
-import Button from '../../components/ui/Button/Button';
-import Input from '../../components/ui/Input/Input';
-import style from '../Auth/Auth.module.scss';
-import authImg from '../../assets/images/auth.jpg';
-import { authenticate } from '../../services/auth/authThunk';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { SubmitHandler, useForm, Controller } from 'react-hook-form';
-import { validateEmail } from '../../utils/validate/validateEmail';
-import { validatePassword } from '../../utils/validate/validatePassword';
-import { Link } from 'react-router-dom';
+import { FC, useEffect } from "react";
+import Button from "../../components/ui/button/button";
+import Input from "../../components/ui/Input/Input";
+import style from "../Auth/Auth.module.scss";
+import authImg from "../../assets/images/auth.jpg";
+import { authenticate } from "../../services/auth/authThunk";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import { validateEmail } from "../../utils/validate/validateEmail";
+import { validatePassword } from "../../utils/validate/validatePassword";
+import { Link } from "react-router-dom";
 
 interface LoginForm {
   email: string;
@@ -25,14 +25,14 @@ const Login: FC = () => {
     control,
     formState: { errors },
   } = useForm<LoginForm>({
-    mode: 'onChange',
+    mode: "onChange",
   });
 
   const { isAuth, firstName, lastName } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (isAuth) {
-      navigate('/');
+      navigate("/");
       toast.success(`Welcome back ${firstName} ${lastName}`);
     }
   }, [isAuth, navigate]);
@@ -55,7 +55,7 @@ const Login: FC = () => {
               name="email"
               control={control}
               rules={{
-                required: 'Email is required',
+                required: "Email is required",
                 validate: validateEmail,
               }}
               render={({ field }) => (
@@ -76,7 +76,7 @@ const Login: FC = () => {
               name="password"
               control={control}
               rules={{
-                required: 'Password is required',
+                required: "Password is required",
                 validate: validatePassword,
               }}
               render={({ field }) => (
