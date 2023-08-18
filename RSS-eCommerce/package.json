@@ -44,8 +44,9 @@
     "vite": "^4.4.5"
   },
   "lint-staged": {
-    "*.ts": [
-      "npm run lint:fix"
+    "*.(tsx|ts)": [
+      "prettier --write",
+      "eslint --fix --color"
     ]
   }
 }
