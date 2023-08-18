@@ -3,8 +3,8 @@ import styles from "./Header.module.scss";
 import NavBar from "./NavBar/NavBar";
 import Search from "../../Search/Search";
 import { Link } from "react-router-dom";
-import { selectName } from '../../../features/auth/authSlice';
-import { useSelector } from 'react-redux';
+import { selectName } from "../../../features/auth/authSlice";
+import { useSelector } from "react-redux";
 
 const Header: FC<{ classes: string }> = ({ classes }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +15,7 @@ const Header: FC<{ classes: string }> = ({ classes }) => {
 
   const handleMenuClick = () => {
     setIsMenuHidden(!isMenuHidden);
-    setIsMenuOpen(!isMenuOpen); 
+    setIsMenuOpen(!isMenuOpen);
   };
 
   useEffect(() => {
@@ -33,25 +33,24 @@ const Header: FC<{ classes: string }> = ({ classes }) => {
   return (
     <header className={`${styles.header} ${classes}`}>
       <h1>Exclusive</h1>
-      { windowWidth <= 600  && isMenuHidden && (
-        <div
-          className= {styles.hamburgerIcon} 
-          onClick={handleMenuClick}
-        >
+      {windowWidth <= 600 && isMenuHidden && (
+        <div className={styles.hamburgerIcon} onClick={handleMenuClick}>
           <div className={styles.hamburgerLine}></div>
           <div className={styles.hamburgerLine}></div>
           <div className={styles.hamburgerLine}></div>
         </div>
       )}
 
-      { windowWidth <= 600 && isMenuOpen && (
+      {windowWidth <= 600 && isMenuOpen && (
         <div className={styles.crossIcon} onClick={handleMenuClick}>
           &#10005;
         </div>
       )}
 
-      {( windowWidth <= 600 && isMenuOpen) || windowWidth > 600 ? <NavBar></NavBar> : null }
-      
+      {(windowWidth <= 600 && isMenuOpen) || windowWidth > 600 ? (
+        <NavBar></NavBar>
+      ) : null}
+
       <div className={styles.panel}>
         <Search></Search>
         <div className={styles.icons}>
