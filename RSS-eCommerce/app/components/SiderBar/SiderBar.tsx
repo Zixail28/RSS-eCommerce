@@ -1,18 +1,29 @@
 import { NavLink } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { fetchCategories } from "../../services/category/categoryThunk";
+import { useEffect } from "react";
 
 import styles from "./SiderBar.module.scss";
-import { categories } from "../../data/users.data";
 
 const Sidebar = () => {
-  const list = categories;
+  const dispatch = useAppDispatch();
+  const categories = useAppSelector(
+    (state) => state.category.categories.results,
+  );
+
+  useEffect(() => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
 
   return (
     <section className={styles.sidebar}>
       <nav className={styles.nav}>
         <ul className={styles.navItems}>
-          {list.map(({ id, name }) => (
-            <li key={id}>
-              <NavLink to={`/categories/${id}`}>{name}</NavLink>
+          {categories.map((category) => (
+            <li key={category.name["en-US"]}>
+              <NavLink to={`/categories/${category.name["en-US"]}`}>
+                {category.name["en-US"]}
+              </NavLink>
             </li>
           ))}
         </ul>
