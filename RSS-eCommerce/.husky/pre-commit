@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-cd ./RSS-eCommerce && npx lint-staged
+cd ./RSS-eCommerce && npx lint-staged --allow-empty

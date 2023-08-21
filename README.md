@@ -48,6 +48,41 @@ Start project:
     npm run dev 
 
 
+## Scripts descriptions
+
+Runs the project in development mode:
+
+    npm run dev
+
+Project build:
+
+    npm run build
+
+Checks code style with linter:
+
+    npm run lint
+
+Fixes code style errors where possible:
+
+    npm run lint:fix
+
+Shows the build version of the project:
+
+    npm run preview
+
+Formats the project according to the prettier:
+
+    npm run format
+
+Required for the initial installation of the Husky:
+
+    npm run prepare
+
+Runs all tests:
+
+    npm run test
+
+
 ## Screenshot:
 Not yet
 </details>

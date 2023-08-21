@@ -1,0 +1,68 @@
+.poster {
+  width: 100%;
+}
+
+.product {
+  background-color: black;
+  color: white; 
+  margin: 3rem;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.description {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3rem;
+}
+
+.title {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%; 
+}
+
+.title img {
+  padding-right: 1rem;
+}
+
+.title p {
+  font-size: 1rem;
+}
+
+.price{
+  width: 100%;
+}
+
+.price h1 {
+  font-size: 3rem;
+  line-height: 3rem;
+}
+
+.show {
+  background-color: black;
+  color: white;
+  border: none;
+  text-decoration-line: underline;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.picture {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+@media (max-width: 750px) {
+  .picture {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .price h1 {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
+}

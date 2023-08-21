@@ -1,0 +1,11 @@
+.sidebar {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+@media (max-width: 550px) {
+  .sidebar {
+    flex-wrap: wrap;
+  }
+}
