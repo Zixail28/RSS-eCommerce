@@ -14,18 +14,20 @@
 
 .panel {
   display: flex;
-  column-gap: 0.5rem;
+  align-items: center;
+  column-gap: 2rem;
 }
 
 .icons {
   display: flex;
+  align-items: center;
   column-gap: 0.25rem;
   a {
     display: flex;
     align-items: center;
     cursor: pointer;
     &:hover {
-      opacity: .7;
+      opacity: 0.7;
     }
     span {
       display: block;
@@ -80,4 +82,10 @@
     justify-content: end;
     margin-top: 30px;
   }
+}
+
+.logout {
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+  margin-left: 1rem;
 }

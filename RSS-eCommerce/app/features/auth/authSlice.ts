@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { authenticate } from '../../services/auth/authThunk';
-import { RootState } from '../../store/store';
-import { register } from '../../services/auth/registerThunk';
+import { createSlice } from "@reduxjs/toolkit";
+import { authenticate } from "../../services/auth/authThunk";
+import { RootState } from "../../store/store";
+import { register } from "../../services/auth/registerThunk";
 
 export interface AuthState {
   email: string | null;
@@ -11,16 +11,18 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-  email: '',
-  firstName: '',
-  lastName: '',
+  email: "",
+  firstName: "",
+  lastName: "",
   isAuth: false,
 };
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    clearAuthState: () => initialState,
+  },
   extraReducers: (builder) => {
     builder.addCase(authenticate.fulfilled, (state, action) => {
       const payload = action.payload.customer;
@@ -42,5 +44,6 @@ export const authSlice = createSlice({
   },
 });
 
+export const { clearAuthState } = authSlice.actions;
 export const selectIsAuth = (state: RootState) => state.auth;
 export const selectName = (state: RootState) => state.auth.firstName;

@@ -1,10 +1,13 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import NavBar from "./NavBar/NavBar";
 import Search from "../../Search/Search";
-import { Link } from "react-router-dom";
-import { selectName } from "../../../features/auth/authSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { clearAuthState, selectName } from "../../../features/auth/authSlice";
 import { useSelector } from "react-redux";
+import { useAppDispatch } from "../../../hooks/hooks";
+import { toast } from "react-toastify";
+import { useAppSelector } from "../../../hooks/hooks";
 
 const Header: FC<{ classes: string }> = ({ classes }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,6 +15,16 @@ const Header: FC<{ classes: string }> = ({ classes }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const name = useSelector(selectName);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const { isAuth } = useAppSelector((state) => state.auth);
+
+  const handleClick = () => {
+    dispatch(clearAuthState());
+    navigate("/");
+    toast.success(`You have successfully logged out`);
+  };
 
   const handleMenuClick = () => {
     setIsMenuHidden(!isMenuHidden);
@@ -63,6 +76,11 @@ const Header: FC<{ classes: string }> = ({ classes }) => {
           <Link to="/user">
             <span className={styles.user}></span>
           </Link>
+          {isAuth && (
+            <button className={styles.logout} onClick={handleClick}>
+              Log out
+            </button>
+          )}
         </div>
         {name}
       </div>
