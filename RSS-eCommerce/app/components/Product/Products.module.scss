@@ -1,6 +1,7 @@
 .products {
   margin-top: 1rem;
   width: 100%;
+  padding-bottom: 3rem;
 }
 
 .title{
@@ -15,7 +16,7 @@
 
 .title p {
   font-weight: bold;
-  color: red;
+  color: #d82626;
 }
 
 .products h2 {
@@ -39,7 +40,7 @@
   background: var(--bg);
   border-radius: 8px;
   overflow: hidden;
-  width: calc(100% / 5 - 20px);
+  width: 22%;
   height: auto;
 }
 
@@ -47,6 +48,10 @@
   padding: 12px;
   display: flex;
   flex-direction: column;
+
+  h3 {
+    font-weight: bold;
+  }
 }
 
 .info {
@@ -115,12 +120,15 @@
 }
 
 .discount {
-  background-color: red;
+  background-color: #d82626;
   color: white;
   border: none;
   border-radius: 2px;
   list-style: none;
-  width: 45px;
+  width: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .discount span {
@@ -135,9 +143,10 @@
 }
 
 .button {
-  display: flex;    
+  display: none;    
   width: 100%;
   background-color: black;
+  border: none;
   color: white;
   justify-content: center;
   font-weight: normal;
@@ -145,14 +154,9 @@
   cursor: pointer;   
 }
 
-@media (max-width: 750px) {
-  .product {
-    width: calc(100% / 3 - 20px);
-  }
-}
-
-@media (max-width: 550px) {
-  .product {
-    width: calc(100% / 2 - 20px);
+.product:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  .button {
+    display: flex;
   }
 }

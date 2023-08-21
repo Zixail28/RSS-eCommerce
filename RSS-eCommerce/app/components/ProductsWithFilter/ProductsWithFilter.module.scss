@@ -1,0 +1,35 @@
+.productsWithFilter {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin: 0.5rem;
+}
+
+.allProducts {
+  margin-left: 1rem;
+  width: 100%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  width: 100%;
+
+  button {
+    border: none;
+    color: white;
+    background-color: black;
+    height: 40px;
+    padding: 10px 20px;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 2rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .productsWithFilter {
+    flex-wrap: wrap;
+  }
+}
