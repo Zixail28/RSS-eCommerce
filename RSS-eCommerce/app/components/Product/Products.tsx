@@ -73,7 +73,14 @@ const Products: FC<ProductsProps> = ({
   }
 
   if (searchFilter != undefined) {
-    list = list.filter((item) => item.name.includes(searchFilter));
+    const searchLowerCase = searchFilter.toLowerCase();
+    list = list.filter((item) => {
+      const nameMatch = item.name.toLowerCase().includes(searchLowerCase);
+      const descriptionMatch = item.description
+        .toLowerCase()
+        .includes(searchLowerCase);
+      return nameMatch || descriptionMatch;
+    });
   }
 
   list = list.slice(start, start + amount);

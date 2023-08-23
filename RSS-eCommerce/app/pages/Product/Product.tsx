@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Button from "../../components/ui/button/button";
+import PhotoModal from "./PhotoModal/PhotoModal";
 import { ProductItem } from "../../data/users.data";
 import freeDelivery from "../../assets/images/freeDelivery.svg";
 import returnDelivery from "../../assets/images/returnDelivery.svg";
@@ -19,6 +20,14 @@ const Product = ({ products }: { products: ProductItem[] }) => {
   const [selectedColor, setSelectedColor] = useState<string>(
     product?.filter.color[0] || "",
   );
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     if (!product) return;
@@ -77,8 +86,10 @@ const Product = ({ products }: { products: ProductItem[] }) => {
           <div
             className={styles.current}
             style={{ backgroundImage: `url(${currentImage})` }}
+            onClick={openModal}
           />
         </div>
+
         <div className={styles.info}>
           <h1 className={styles.title}>{product.name}</h1>
           <div className={styles.wrapperPrice}>
@@ -165,6 +176,14 @@ const Product = ({ products }: { products: ProductItem[] }) => {
             </div>
           </div>
         </div>
+
+        {isModalOpen && (
+          <PhotoModal
+            isOpen={isModalOpen}
+            images={[{ original: currentImage }]}
+            onClose={closeModal}
+          />
+        )}
       </div>
     </section>
   );
