@@ -4,7 +4,7 @@ import Products from "../../components/Product/Products";
 import styles from "./ProductsWithFilter.module.scss";
 import { productsList } from "../../data/users.data";
 import Button from "../../components/ui/button/button";
-import { FiltersItem } from "../../data/filters";
+import { FiltersItem, StateSort } from "../../data/filters";
 
 interface ProductsProps {
   category: string;
@@ -13,6 +13,13 @@ interface ProductsProps {
 const ProductsWithFilter: FC<ProductsProps> = ({ category }) => {
   const [amount, setAmount] = useState(8);
   const [start, setStart] = useState(0);
+  const [sortNameDirection, setSortNameDirection] = useState(
+    StateSort.ascending,
+  );
+  const [sortPriceDirection, setSortPriceDirection] = useState(
+    StateSort.ascending,
+  );
+
   const [filteredProductsCount, setFilteredProductsCount] = useState(
     productsList.length,
   );
@@ -69,6 +76,14 @@ const ProductsWithFilter: FC<ProductsProps> = ({ category }) => {
     setFilteredProductsCount(filteredCount);
   };
 
+  const handleApplySortName = (state: StateSort) => {
+    setSortNameDirection(state);
+  };
+
+  const handleApplySortPrice = (state: StateSort) => {
+    setSortPriceDirection(state);
+  };
+
   const handleNextClick = () => {
     if (start + amount < filteredProductsCount) {
       setStart(start + amount);
@@ -85,7 +100,11 @@ const ProductsWithFilter: FC<ProductsProps> = ({ category }) => {
 
   return (
     <section className={styles.productsWithFilter}>
-      <FilterList onApplyFilters={handleApplyFilters} />
+      <FilterList
+        onApplyFilters={handleApplyFilters}
+        onApplySortName={handleApplySortName}
+        onApplySortPrice={handleApplySortPrice}
+      />
       <div className={styles.allProducts}>
         <Products
           products={productsList}
@@ -94,6 +113,8 @@ const ProductsWithFilter: FC<ProductsProps> = ({ category }) => {
           amount={amount}
           filters={appliedFilters}
           start={start}
+          sortNameDirection={sortNameDirection}
+          sortPriceDirection={sortPriceDirection}
         />
         <div className={styles.buttons}>
           <Button type="button" onClick={handlePrevClick}>
