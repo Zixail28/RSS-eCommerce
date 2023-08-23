@@ -4,3 +4,9 @@ export interface FiltersItem {
   availability: string;
   discountToDay: boolean;
 }
+
+export enum StateSort {
+  none,
+  ascending,
+  descending,
+}

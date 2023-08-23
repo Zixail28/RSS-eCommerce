@@ -2,17 +2,22 @@ import React, { useState } from "react";
 import styles from "./FilterList.module.scss";
 import { productsList } from "../../../data/users.data";
 import Button from "../../ui/button/button";
-import { FiltersItem } from "../../../data/filters";
+import { FiltersItem, StateSort } from "../../../data/filters";
 
 const FilterList: React.FC<{
   onApplyFilters: (filters: FiltersItem) => void;
-}> = ({ onApplyFilters }) => {
+  onApplySortName: (stateSortName: StateSort) => void;
+  onApplySortPrice: (stateSortPrice: StateSort) => void;
+}> = ({ onApplyFilters, onApplySortName, onApplySortPrice }) => {
   const [selectedFilters, setSelectedFilters] = useState<FiltersItem>({
     brand: "All Brands",
     color: "All Colors",
     availability: "All Availability",
     discountToDay: false,
   });
+
+  const [stateSortName, setStateSortName] = useState(StateSort.ascending);
+  const [stateSortPrice, setStateSortPrice] = useState(StateSort.none);
 
   const uniqueBrands = Array.from(
     new Set(productsList.flatMap((product) => product.filter.brand)),
@@ -64,11 +69,41 @@ const FilterList: React.FC<{
   };
 
   const handleApplySortName = () => {
-    console.log("Sort name");
+    if (stateSortName === StateSort.ascending) {
+      setStateSortName(StateSort.descending);
+      onApplySortName(StateSort.descending);
+      setStateSortPrice(StateSort.none);
+      onApplySortPrice(StateSort.none);
+    } else if (stateSortName === StateSort.descending) {
+      setStateSortName(StateSort.ascending);
+      onApplySortName(StateSort.ascending);
+      setStateSortPrice(StateSort.none);
+      onApplySortPrice(StateSort.none);
+    } else {
+      setStateSortName(StateSort.ascending);
+      onApplySortName(StateSort.ascending);
+      setStateSortPrice(StateSort.none);
+      onApplySortPrice(StateSort.none);
+    }
   };
 
   const handleApplySortPrice = () => {
-    console.log("Sort price");
+    if (stateSortPrice === StateSort.ascending) {
+      setStateSortPrice(StateSort.descending);
+      onApplySortPrice(StateSort.descending);
+      setStateSortName(StateSort.none);
+      onApplySortName(StateSort.none);
+    } else if (stateSortPrice === StateSort.descending) {
+      setStateSortPrice(StateSort.ascending);
+      onApplySortPrice(StateSort.ascending);
+      setStateSortName(StateSort.none);
+      onApplySortName(StateSort.none);
+    } else {
+      setStateSortPrice(StateSort.ascending);
+      onApplySortPrice(StateSort.ascending);
+      setStateSortName(StateSort.none);
+      onApplySortName(StateSort.none);
+    }
   };
 
   return (
@@ -129,13 +164,21 @@ const FilterList: React.FC<{
       <div className={styles.sortProducts}>
         <h5>Sort by name</h5>
         <Button type="button" onClick={handleApplySortName}>
-          &#8593; &#8595;
+          {stateSortName === StateSort.none
+            ? "↑ ↓"
+            : stateSortName === StateSort.ascending
+            ? "↑ ↑"
+            : "↓ ↓"}
         </Button>
       </div>
       <div className={styles.sortProducts}>
-        <h5>Sort by name</h5>
+        <h5>Sort by price</h5>
         <Button type="button" onClick={handleApplySortPrice}>
-          &#8593; &#8595;
+          {stateSortPrice === StateSort.none
+            ? "↑ ↓"
+            : stateSortPrice === StateSort.ascending
+            ? "↑ ↑"
+            : "↓ ↓"}
         </Button>
       </div>
     </section>

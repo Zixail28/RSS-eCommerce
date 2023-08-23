@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 import { ProductItem } from "../../data/users.data";
-import { FiltersItem } from "../../data/filters";
+import { FiltersItem, StateSort } from "../../data/filters";
 import styles from "./Products.module.scss";
 import rectangle from "../../assets/images/rectangle.svg";
 import heart from "../../assets/images/heart.svg";
@@ -14,6 +14,8 @@ interface ProductsProps {
   amount: number;
   filters?: FiltersItem;
   start?: number;
+  sortNameDirection?: StateSort;
+  sortPriceDirection?: StateSort;
 }
 
 const Products: FC<ProductsProps> = ({
@@ -23,8 +25,23 @@ const Products: FC<ProductsProps> = ({
   amount,
   filters,
   start = 0,
+  sortNameDirection = StateSort.ascending,
+  sortPriceDirection = StateSort.ascending,
 }) => {
   let list = products.slice();
+
+  if (sortNameDirection === StateSort.ascending) {
+    list.sort((a, b) => b.name.localeCompare(a.name));
+  } else if (sortNameDirection === StateSort.descending) {
+    list.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  if (sortPriceDirection === StateSort.ascending) {
+    list.sort((a, b) => a.price - b.price);
+  } else if (sortPriceDirection === StateSort.descending) {
+    list.sort((a, b) => b.price - a.price);
+  }
+
   if (filters) {
     list = list.filter((product) => {
       return (
