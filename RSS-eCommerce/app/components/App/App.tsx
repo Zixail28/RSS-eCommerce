@@ -6,6 +6,7 @@ import PageNotFound from "../../pages/PageNotFound/PageNotFound";
 import Login from "../../pages/Auth/Login";
 import Register from "../../pages/Auth/Register";
 import Categories from "../../pages/Categories/Categories";
+import SearchPage from "../../pages/SearchPage/SearchPage";
 import Product from "../../pages/Product/Product";
 import { productsList } from "../../data/users.data";
 
@@ -22,6 +23,7 @@ function App() {
             path="/product/:productName"
             element={<Product products={productsList} />}
           />
+          <Route path="/search/:query" element={<SearchPage />} />
           <Route path="*" element={<PageNotFound />}></Route>
         </Route>
       </Routes>
