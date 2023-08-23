@@ -1,3 +1,13 @@
+.searchContainer{
+  display: flex;
+  flex-wrap: nowrap;
+
+  button{
+    border: none;
+    cursor: pointer;
+  }
+}
+
 .search {
   border-radius: 4px;
   outline: none;

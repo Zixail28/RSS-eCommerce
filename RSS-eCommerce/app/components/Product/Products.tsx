@@ -16,6 +16,7 @@ interface ProductsProps {
   start?: number;
   sortNameDirection?: StateSort;
   sortPriceDirection?: StateSort;
+  searchFilter?: string;
 }
 
 const Products: FC<ProductsProps> = ({
@@ -27,6 +28,7 @@ const Products: FC<ProductsProps> = ({
   start = 0,
   sortNameDirection = StateSort.ascending,
   sortPriceDirection = StateSort.ascending,
+  searchFilter,
 }) => {
   let list = products.slice();
 
@@ -42,7 +44,7 @@ const Products: FC<ProductsProps> = ({
     list.sort((a, b) => b.price - a.price);
   }
 
-  if (filters) {
+  if (filters && searchFilter === undefined) {
     list = list.filter((product) => {
       return (
         (filters.brand === "All Brands" ||
@@ -66,8 +68,12 @@ const Products: FC<ProductsProps> = ({
     });
   }
 
-  if (title === "Flash Sales") {
+  if (title === "Flash Sales" && searchFilter === undefined) {
     list = list.filter((product) => product.filter.discountToDay === true);
+  }
+
+  if (searchFilter != undefined) {
+    list = list.filter((item) => item.name.includes(searchFilter));
   }
 
   list = list.slice(start, start + amount);

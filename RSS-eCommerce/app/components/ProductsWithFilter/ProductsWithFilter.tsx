@@ -96,8 +96,6 @@ const ProductsWithFilter: FC<ProductsProps> = ({ category }) => {
     }
   };
 
-  console.log(appliedFilters);
-
   return (
     <section className={styles.productsWithFilter}>
       <FilterList
