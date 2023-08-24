@@ -10,7 +10,7 @@ import { ToastContainer } from "react-toastify";
 ReactDOM.createRoot(document.getElementById("root") as HTMLDivElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename={`${import.meta.env.VITE_BASE_URL || ""}`}>
         <App />
         <ToastContainer />
       </BrowserRouter>

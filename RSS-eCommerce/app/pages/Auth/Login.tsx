@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import Button from "../../components/ui/button/button";
+import Button from "../../components/ui/Button/Button";
 import Input from "../../components/ui/Input/Input";
 import style from "../Auth/Auth.module.scss";
 import authImg from "../../assets/images/auth.jpg";
@@ -66,7 +66,7 @@ const Login: FC = () => {
                     placeholder="Email"
                     value={field.value}
                     error={errors.email?.message}
-                    onChange={(newValue: string) => field.onChange(newValue)}
+                    onChange={(e) => field.onChange(e.target.value)}
                     onBlur={field.onBlur}
                   />
                 </>
@@ -87,7 +87,7 @@ const Login: FC = () => {
                     placeholder="Password"
                     showPasswordIcon={true}
                     error={errors.password?.message}
-                    onChange={(newValue: string) => field.onChange(newValue)}
+                    onChange={(e) => field.onChange(e.target.value)}
                   />
                 </>
               )}
