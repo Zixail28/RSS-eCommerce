@@ -1,4 +1,4 @@
-export const validateEmail = (email: string) => {
+export const validateEmail = (email: string | null) => {
   if (!email) {
     return 'Email is required.';
   } else if (!email.includes('@')) {

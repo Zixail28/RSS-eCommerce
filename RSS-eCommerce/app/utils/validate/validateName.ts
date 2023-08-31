@@ -1,4 +1,4 @@
-export const validateName = (name: string) => {
+export const validateName = (name: string | null) => {
   if (!name) {
     return 'Name is required.';
   } else if (!/^[a-zA-Z]+$/.test(name)) {

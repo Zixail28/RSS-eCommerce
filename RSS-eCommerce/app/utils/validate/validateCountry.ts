@@ -8,7 +8,7 @@ export const validateCountry = (country: string) => {
   const isValidCountry = countries.includes(country.toUpperCase());
 
   if (!isValidCountry) {
-    return 'Invalid country. e.g. DE, UA, EN';
+    return 'Invalid country. (example: DE, UA, BY)';
   }
 
   return true;

@@ -1,15 +1,33 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { persistReducer, persistStore } from 'redux-persist';
+import {
+  configureStore,
+  combineReducers,
+  getDefaultMiddleware,
+} from '@reduxjs/toolkit';
 import { authSlice } from '../features/auth/authSlice';
-// import { registerSlice } from '../features/auth/registerSlice';
+import sessionStorage from 'redux-persist/es/storage/session';
 
-export type RootState = ReturnType<typeof store.getState>;
+const persistConfig = {
+  key: 'root',
+  storage: sessionStorage,
+};
+
+const rootReducer = combineReducers({
+  auth: authSlice.reducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-  reducer: {
-    auth: authSlice.reducer,
-    // register: registerSlice.reducer,
-  },
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: ['persist/PERSIST'],
+    },
+  }),
   devTools: process.env.NODE_ENV !== 'production',
 });
 
+export const persistor = persistStore(store);
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

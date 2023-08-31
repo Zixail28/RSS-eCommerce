@@ -20,6 +20,11 @@ const NavBar: FC = () => {
         <NavLink to={'/about'} className={classGen}>
           About
         </NavLink>
+        {isAuth && (
+          <NavLink to={'/profile'} className={classGen}>
+            Profile
+          </NavLink>
+        )}
         {!isAuth && (
           <>
             <NavLink to={'/login'} className={classGen}>
