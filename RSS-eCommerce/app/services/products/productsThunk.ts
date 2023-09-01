@@ -27,7 +27,7 @@ export const fetchProducts = createAsyncThunk(
       );
 
       const response = await axios.get(
-        `${API_BASE_URL}/${PROJECT_KEY}/products`,
+        `${API_BASE_URL}/${PROJECT_KEY}/products?limit=30`,
         {
           headers: {
             Authorization: `Bearer ${authResponse.data.access_token}`,

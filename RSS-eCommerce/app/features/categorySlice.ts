@@ -29,5 +29,3 @@ export const categorySlice = createSlice({
     });
   },
 });
-
-export const { reducer: categoryReducer } = categorySlice;

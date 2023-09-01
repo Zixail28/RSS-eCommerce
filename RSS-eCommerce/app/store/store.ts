@@ -1,16 +1,16 @@
-import { persistReducer, persistStore } from 'redux-persist';
+import { persistReducer, persistStore } from "redux-persist";
 import {
   configureStore,
   combineReducers,
   getDefaultMiddleware,
-} from '@reduxjs/toolkit';
-import sessionStorage from 'redux-persist/es/storage/session';
+} from "@reduxjs/toolkit";
+import sessionStorage from "redux-persist/es/storage/session";
 import { authSlice } from "../features/auth/authSlice";
 import { categorySlice } from "../features/categorySlice";
 import { productsSlice } from "../features/productsSlice";
 
 const persistConfig = {
-  key: 'root',
+  key: "root",
   storage: sessionStorage,
 };
 
@@ -26,10 +26,10 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware({
     serializableCheck: {
-      ignoredActions: ['persist/PERSIST'],
+      ignoredActions: ["persist/PERSIST"],
     },
   }),
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export const persistor = persistStore(store);
