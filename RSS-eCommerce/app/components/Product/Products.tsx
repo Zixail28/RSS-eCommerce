@@ -72,14 +72,13 @@ const Products: FC<ProductsProps> = ({
     list = list.filter((product) => product.filter.discountToDay === true);
   }
 
-  if (searchFilter != undefined) {
-    const searchLowerCase = searchFilter.toLowerCase();
+  if (searchFilter !== undefined) {
+    const searchWords = searchFilter.toLowerCase().split(" ");
+
     list = list.filter((item) => {
-      const nameMatch = item.name.toLowerCase().includes(searchLowerCase);
-      const descriptionMatch = item.description
-        .toLowerCase()
-        .includes(searchLowerCase);
-      return nameMatch || descriptionMatch;
+      return searchWords.every((word) =>
+        item.name.toLowerCase().includes(word),
+      );
     });
   }
 
@@ -94,7 +93,7 @@ const Products: FC<ProductsProps> = ({
       <h2>{title}</h2>
       <div className={styles.list}>
         {list.map(({ id, images, name, shortDescription, price, priceOld }) => {
-          const percentDiscount = Math.round((price * 100) / priceOld);
+          const percentDiscount = 100 - Math.round((price * 100) / priceOld);
 
           return (
             <div className={styles.product} key={id}>
@@ -115,7 +114,12 @@ const Products: FC<ProductsProps> = ({
               >
                 <div className={styles.image}>
                   <div className={styles.picture}>
-                    <img src={images[0]} alt="Product" width="60%" />
+                    <img
+                      src={images[0]}
+                      alt="Product"
+                      max-width="200px"
+                      height="100px"
+                    />
                   </div>
                   <button className={styles.button}>Add To Cart</button>
                 </div>
@@ -126,9 +130,7 @@ const Products: FC<ProductsProps> = ({
                   <div className={styles.info}>
                     <div className={styles.prices}>
                       <div className={styles.price}>{price}$</div>
-                      <div className={styles.oldPrice}>
-                        {Math.floor(price * 0.8)}$
-                      </div>
+                      <div className={styles.oldPrice}>{priceOld}$</div>
                     </div>
 
                     <div className={styles.purchases}>

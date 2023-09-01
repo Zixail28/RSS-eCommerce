@@ -28,7 +28,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ isOpen, images, onClose }) => {
       <Gallery
         items={images}
         startIndex={currentIndex}
-        onSlide={(index: number) => setCurrentIndex(index)}
+        onSlide={(index) => setCurrentIndex(index)}
         onClick={handleImageClick}
       />
     </Modal>

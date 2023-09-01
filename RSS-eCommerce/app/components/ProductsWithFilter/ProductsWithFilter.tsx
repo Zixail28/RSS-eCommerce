@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from "react";
 import FilterList from "./Filter/FilterList";
 import Products from "../../components/Product/Products";
 import styles from "./ProductsWithFilter.module.scss";
-import { productsList } from "../../data/users.data";
+import { productsListServer } from "../../data/users.data";
 import Button from "../../components/ui/button/button";
 import { FiltersItem, StateSort } from "../../data/filters";
 
@@ -21,7 +21,7 @@ const ProductsWithFilter: FC<ProductsProps> = ({ category }) => {
   );
 
   const [filteredProductsCount, setFilteredProductsCount] = useState(
-    productsList.length,
+    productsListServer.length,
   );
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const ProductsWithFilter: FC<ProductsProps> = ({ category }) => {
     setStart(0);
     setAppliedFilters(filters);
 
-    const filteredCount = productsList.filter((product) => {
+    const filteredCount = productsListServer.filter((product) => {
       return (
         (filters.brand === "All Brands" ||
           product.filter.brand.some((brand) =>
@@ -105,7 +105,7 @@ const ProductsWithFilter: FC<ProductsProps> = ({ category }) => {
       />
       <div className={styles.allProducts}>
         <Products
-          products={productsList}
+          products={productsListServer}
           title=""
           titleCategory={category}
           amount={amount}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./FilterList.module.scss";
-import { productsList } from "../../../data/users.data";
+import { productsListServer } from "../../../data/users.data";
 import Button from "../../ui/button/button";
 import { FiltersItem, StateSort } from "../../../data/filters";
 
@@ -20,13 +20,15 @@ const FilterList: React.FC<{
   const [stateSortPrice, setStateSortPrice] = useState(StateSort.none);
 
   const uniqueBrands = Array.from(
-    new Set(productsList.flatMap((product) => product.filter.brand)),
+    new Set(productsListServer.flatMap((product) => product.filter.brand)),
   );
   const uniqueColors = Array.from(
-    new Set(productsList.flatMap((product) => product.filter.color)),
+    new Set(productsListServer.flatMap((product) => product.filter.color)),
   );
   const uniqueAvailabilities = Array.from(
-    new Set(productsList.flatMap((product) => product.filter.availability)),
+    new Set(
+      productsListServer.flatMap((product) => product.filter.availability),
+    ),
   );
 
   const handleFilterChange = (

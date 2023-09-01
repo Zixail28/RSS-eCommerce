@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useParams } from "react-router-dom";
 import Products from "../../components/Product/Products";
-import { productsList } from "../../data/users.data";
+import { productsListServer } from "../../data/users.data";
 
 const SearchPage: FC = () => {
   const { query } = useParams<{ query: string }>();
@@ -10,10 +10,10 @@ const SearchPage: FC = () => {
     <section>
       <h2>Search Results for: {query}</h2>
       <Products
-        products={productsList}
+        products={productsListServer}
         title=""
         titleCategory="All products"
-        amount={productsList.length}
+        amount={productsListServer.length}
         searchFilter={query}
       />
     </section>
