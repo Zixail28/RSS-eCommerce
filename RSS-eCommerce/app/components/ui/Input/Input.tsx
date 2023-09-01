@@ -8,7 +8,9 @@ const Input: FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
       type = 'text',
       id,
       placeholder = '',
+      value = '',
       error,
+      defaultChecked,
       onChange,
       onBlur,
       showPasswordIcon = false,
@@ -30,6 +32,8 @@ const Input: FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
           className={`${style.input} ${error ? `${style.error__input}` : ''}`}
           placeholder={placeholder}
           type={inputType}
+          value={value}
+          defaultChecked={defaultChecked}
           onChange={onChange}
           onBlur={onBlur}
           ref={ref}

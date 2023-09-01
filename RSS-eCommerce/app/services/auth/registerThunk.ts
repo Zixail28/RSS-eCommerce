@@ -130,7 +130,7 @@ export const register = createAsyncThunk<
       `/customers/${customerData.data.customer.id}`
     );
 
-    return response.data;
+    return { ...response.data, token };
   } catch (e) {
     const error = e as ApiError;
 

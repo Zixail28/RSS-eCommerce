@@ -1,5 +1,4 @@
 import { FC, useState, useEffect } from "react";
-
 import styles from "./Home.module.scss";
 import Sidebar from "../../components/SiderBar/SiderBar";
 import Poster from "../../components/Poster/Poster";
@@ -13,7 +12,6 @@ import {
   FiltItem,
 } from "../../data/users.data";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-
 import { fetchProducts } from "../../services/products/productsThunk";
 
 const Home: FC = () => {
@@ -32,12 +30,12 @@ const Home: FC = () => {
       }
     };
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
     handleResize();
     dispatch(fetchProducts());
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, [dispatch]);
 

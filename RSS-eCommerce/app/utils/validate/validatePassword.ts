@@ -1,4 +1,4 @@
-export const validatePassword = (password: string) => {
+export const validatePassword = (password: string | null) => {
   if (!password) {
     return 'Password is required.';
   } else if (password.length < 8) {

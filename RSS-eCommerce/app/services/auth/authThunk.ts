@@ -9,7 +9,7 @@ const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
 const CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET;
 
 interface Credentials {
-  email: string;
+  email: string | null;
   password: string;
 }
 
@@ -51,7 +51,10 @@ export const authenticate = createAsyncThunk<
       }
     );
 
-    return response.data;
+    return {
+      ...response.data,
+      ...tokenData.data,
+    };
   } catch (e) {
     const error = e as ApiError;
 

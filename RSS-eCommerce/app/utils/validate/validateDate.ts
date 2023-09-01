@@ -1,6 +1,6 @@
 import { parseISO, differenceInYears } from 'date-fns';
 
-export const validateDateOfBirth = (dateOfBirth: string) => {
+export const validateDateOfBirth = (dateOfBirth: string | null) => {
   if (!dateOfBirth) {
     return 'Date of birth is required.';
   }

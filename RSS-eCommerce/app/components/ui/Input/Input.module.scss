@@ -6,6 +6,7 @@
   padding: 5px;
   font-size: 1rem;
   font-weight: 400;
+  background: transparent;
 }
 
 .error__input {
@@ -14,12 +15,16 @@
 
 .input__wrapper {
   position: relative;
-  margin: 0 0 2.5rem 0;
-  width: calc(50% - 1rem);
+  width: 100%;
+  margin-bottom: 2rem;
 
   @media (max-width: 767px) {
     width: 100%;
   }
+}
+
+.input__label {
+  font-style: italic;
 }
 
 .error {
