@@ -8,7 +8,6 @@ import Register from "../../pages/Auth/Register";
 import Categories from "../../pages/Categories/Categories";
 import SearchPage from "../../pages/SearchPage/SearchPage";
 import Product from "../../pages/Product/Product";
-import { productsList } from "../../data/users.data";
 
 function App() {
   return (
@@ -19,10 +18,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/registration" element={<Register />}></Route>
           <Route path="/categories/:categoryName" element={<Categories />} />
-          <Route
-            path="/product/:productName"
-            element={<Product products={productsList} />}
-          />
+          <Route path="/product/:productName" element={<Product />} />
           <Route path="/search/:query" element={<SearchPage />} />
           <Route path="*" element={<PageNotFound />}></Route>
         </Route>

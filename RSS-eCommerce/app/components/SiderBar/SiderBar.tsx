@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { fetchCategories } from "../../services/category/categoryThunk";
 import { useEffect } from "react";
+import { setCategoriesServer } from "../../data/users.data";
 
 import styles from "./SiderBar.module.scss";
 
@@ -14,6 +15,17 @@ const Sidebar = () => {
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (categories.length > 0) {
+      setCategoriesServer(
+        categories.map((category) => ({
+          id: category.id,
+          name: category.name["en-US"],
+        })),
+      );
+    }
+  }, [categories]);
 
   return (
     <section className={styles.sidebar}>

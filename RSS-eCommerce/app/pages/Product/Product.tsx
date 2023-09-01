@@ -3,14 +3,16 @@ import { NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Button from "../../components/ui/button/button";
 import PhotoModal from "./PhotoModal/PhotoModal";
-import { ProductItem } from "../../data/users.data";
 import freeDelivery from "../../assets/images/freeDelivery.svg";
 import returnDelivery from "../../assets/images/returnDelivery.svg";
 import styles from "./Product.module.scss";
+import { productsListServer } from "../../data/users.data";
 
-const Product = ({ products }: { products: ProductItem[] }) => {
+const Product = () => {
   const { productName } = useParams();
-  const product = products.find((product) => product.name === productName);
+  const product = productsListServer.find(
+    (product) => product.name === productName,
+  );
 
   const [currentImage, setCurrentImage] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
@@ -86,7 +88,7 @@ const Product = ({ products }: { products: ProductItem[] }) => {
           <div
             className={styles.current}
             style={{ backgroundImage: `url(${currentImage})` }}
-            onClick={openModal}
+            onClick={() => openModal({ currentImage })}
           />
         </div>
 

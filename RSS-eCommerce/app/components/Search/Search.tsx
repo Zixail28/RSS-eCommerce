@@ -10,10 +10,6 @@ const Search: FC = () => {
     setSearchText(e.target.value);
   };
 
-  const handleSearch = () => {
-    setSearchText("");
-  };
-
   return (
     <div className={styles.searchContainer}>
       <input
@@ -22,7 +18,7 @@ const Search: FC = () => {
         value={searchText}
         onChange={handleInputChange}
       />
-      <button className={styles.searchButton} onClick={handleSearch}>
+      <button className={styles.searchButton}>
         <Link to={`/search/${searchText}`}>
           <img src={searchIcon} alt="Search" />
         </Link>
