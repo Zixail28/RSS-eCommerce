@@ -10,8 +10,14 @@ import Categories from "../../pages/Categories/Categories";
 import SearchPage from "../../pages/SearchPage/SearchPage";
 import Product from "../../pages/Product/Product";
 import { PublicRoute } from "../../routes/PublicRoute";
+import Modal from "react-modal";
+import ReactDOM from "react-dom";
 
 function App() {
+  const rootElement = document.getElementById("root");
+  Modal.setAppElement(rootElement);
+  ReactDOM.render(<App />, rootElement);
+
   return (
     <>
       <Routes>
@@ -25,7 +31,10 @@ function App() {
           <Route path="/registration" element={<Register />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/categories/:categoryName" element={<Categories />} />
-          <Route path="/product/:productName" element={<Product />} />
+          <Route
+            path="/product/:productName/:productId"
+            element={<Product />}
+          />
           <Route path="/search/:query" element={<SearchPage />} />
           <Route path="*" element={<PageNotFound />}></Route>
         </Route>

@@ -108,7 +108,7 @@ const Products: FC<ProductsProps> = ({
               </div>
 
               <Link
-                to={`/product/${name}`}
+                to={`/product/${name}/id=${id}`}
                 key={id}
                 className={styles.productLink}
               >
