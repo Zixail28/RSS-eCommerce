@@ -9,6 +9,7 @@ import { authSlice } from "../features/auth/authSlice";
 import { categorySlice } from "../features/categorySlice";
 import { productsSlice } from "../features/productsSlice";
 import { searchProductsSlice } from "../features/searchProductsSlice";
+import { productSlice } from "../features/productSlice";
 
 const persistConfig = {
   key: "root",
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   category: categorySlice.reducer,
   products: productsSlice.reducer,
   search: searchProductsSlice.reducer,
+  product: productSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

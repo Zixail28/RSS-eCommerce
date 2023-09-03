@@ -163,8 +163,6 @@ const Home: FC = () => {
       };
     }
 
-    // console.log(productData.masterData.current.name["en-US"]);
-
     const productItem: ProductItem = {
       id: productData.id,
       images: images,
