@@ -8,6 +8,7 @@ import sessionStorage from "redux-persist/es/storage/session";
 import { authSlice } from "../features/auth/authSlice";
 import { categorySlice } from "../features/categorySlice";
 import { productsSlice } from "../features/productsSlice";
+import { searchProductsSlice } from "../features/searchProductsSlice";
 
 const persistConfig = {
   key: "root",
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   auth: authSlice.reducer,
   category: categorySlice.reducer,
   products: productsSlice.reducer,
+  search: searchProductsSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -30,12 +30,12 @@ const Home: FC = () => {
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize();
     dispatch(fetchProducts());
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, [dispatch]);
 
@@ -163,7 +163,7 @@ const Home: FC = () => {
       };
     }
 
-    console.log(productData.masterData.current.name["en-US"]);
+    // console.log(productData.masterData.current.name["en-US"]);
 
     const productItem: ProductItem = {
       id: productData.id,
