@@ -7,12 +7,16 @@ import freeDelivery from "../../assets/images/freeDelivery.svg";
 import returnDelivery from "../../assets/images/returnDelivery.svg";
 import styles from "./Product.module.scss";
 import { productsListServer } from "../../data/users.data";
+import { useAppDispatch } from "../../hooks/hooks";
+import { fetchProduct } from "../../services/products/productThunk";
 
 const Product = () => {
-  const { productName } = useParams();
+  const { productName, productId } = useParams();
   const product = productsListServer.find(
     (product) => product.name === productName,
   );
+
+  const dispatch = useAppDispatch();
 
   const [currentImage, setCurrentImage] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
@@ -31,10 +35,51 @@ const Product = () => {
     setIsModalOpen(false);
   };
 
+  const [description, setDescription] = useState<string>("");
+  const [name, setName] = useState<string>("");
+  const [price, setPrice] = useState<string>("");
+  const [priceOld, setPriceOld] = useState<string>("");
+  const [images, setImages] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (productId) {
+      dispatch(fetchProduct(productId)).then((resultAction) => {
+        if (fetchProduct.fulfilled.match(resultAction)) {
+          const productData = resultAction.payload;
+          setDescription(
+            productData.masterData.current.description["en-US"] || "",
+          );
+          setCurrentImage(
+            productData.masterData.current.masterVariant.images[0],
+          );
+          setName(productData.masterData.current.name["en-US"]);
+          setPrice(
+            String(
+              productData.masterData.staged.masterVariant.prices[0].value
+                .centAmount / 10,
+            ),
+          );
+          setPriceOld(
+            String(
+              productData.masterData.staged.masterVariant.prices[0].discounted
+                .value.centAmount / 10,
+            ),
+          );
+          const imagesAll = productData.masterData.current.masterVariant.images;
+          const images: string[] = [];
+          for (let k = 0; k < imagesAll.length; k++) {
+            images.push(imagesAll[k].url);
+          }
+          setImages(images);
+          setCurrentImage(images[0]);
+        }
+      });
+    }
+  }, [dispatch, productId]);
+
   useEffect(() => {
     if (!product) return;
     if (!product.images.length) return;
-    setCurrentImage(product.images[0]);
     setSelectedBrand(product?.filter.brand[0] || "");
     setSelectedColor(product?.filter.color[0] || "");
   }, [product]);
@@ -69,14 +114,14 @@ const Product = () => {
         <NavLink to={`/categories/${product.category}`}>
           {product.category}
         </NavLink>
-        <p> / {product.name}</p>
+        <p> / {name}</p>
       </div>
 
       <div className={styles.product}>
         <div className={styles.images}></div>
         <div className={styles.images}>
           <div className={styles.imagesList}>
-            {product.images.map((image, i) => (
+            {images.map((image, i) => (
               <div
                 key={i}
                 className={styles.image}
@@ -93,12 +138,12 @@ const Product = () => {
         </div>
 
         <div className={styles.info}>
-          <h1 className={styles.title}>{product.name}</h1>
+          <h1 className={styles.title}>{name}</h1>
           <div className={styles.wrapperPrice}>
-            <div className={styles.price}>{product.price}$</div>
-            <div className={styles.priceOld}>{product.priceOld}$</div>
+            <div className={styles.price}>{price}$</div>
+            <div className={styles.priceOld}>{priceOld}$</div>
           </div>
-          <p className={styles.description}>{product.description}</p>
+          <p className={styles.description}>{description}</p>
 
           <div className={styles.filters}>
             <div className={styles.filter}>
