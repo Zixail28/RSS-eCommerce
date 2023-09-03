@@ -1,5 +1,4 @@
 import { FC, ChangeEvent, useState } from "react";
-// import { Link } from 'react-router-dom';
 import styles from "./Search.module.scss";
 import { searchProducts } from "../../services/searchProductsThunk/searchProductsThunk";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
@@ -11,7 +10,6 @@ const Search: FC = () => {
   const [showResults, setShowResults] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const products = useAppSelector((state) => state.search.products);
-  console.log(products);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -44,7 +42,7 @@ const Search: FC = () => {
           {products.results &&
             products.results.map((item) => (
               <Link
-                to={`/product/${item.name["en-US"]}`}
+                to={`/product/${item.name["en-US"]}/id=${item.id}`}
                 key={item.id}
                 onClick={hideResults}
               >

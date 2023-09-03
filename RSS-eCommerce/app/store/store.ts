@@ -4,16 +4,16 @@ import {
   combineReducers,
   getDefaultMiddleware,
 } from "@reduxjs/toolkit";
-import sessionStorage from "redux-persist/es/storage/session";
 import { authSlice } from "../features/auth/authSlice";
 import { categorySlice } from "../features/categorySlice";
 import { productsSlice } from "../features/productsSlice";
 import { searchProductsSlice } from "../features/searchProductsSlice";
 import { productSlice } from "../features/productSlice";
+import localStorage from "redux-persist/es/storage";
 
 const persistConfig = {
   key: "root",
-  storage: sessionStorage,
+  storage: localStorage,
 };
 
 const rootReducer = combineReducers({

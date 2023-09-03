@@ -7,17 +7,10 @@ import Login from "../../pages/Auth/Login";
 import Register from "../../pages/Auth/Register";
 import Profile from "../../pages/Profile/Profile";
 import Categories from "../../pages/Categories/Categories";
-import SearchPage from "../../pages/SearchPage/SearchPage";
 import Product from "../../pages/Product/Product";
 import { PublicRoute } from "../../routes/PublicRoute";
-import Modal from "react-modal";
-import ReactDOM from "react-dom";
 
 function App() {
-  const rootElement = document.getElementById("root");
-  Modal.setAppElement(rootElement);
-  ReactDOM.render(<App />, rootElement);
-
   return (
     <>
       <Routes>
@@ -35,7 +28,6 @@ function App() {
             path="/product/:productName/:productId"
             element={<Product />}
           />
-          <Route path="/search/:query" element={<SearchPage />} />
           <Route path="*" element={<PageNotFound />}></Route>
         </Route>
       </Routes>
