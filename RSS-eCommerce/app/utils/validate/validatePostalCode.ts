@@ -7,7 +7,7 @@ export const validatePostalCode = (countryCode: string, postalCode: string) => {
   if (!postalCodeRegexMap[countryCode]) {
     const digitsOnlyRegex = /^\d+$/;
     if (!digitsOnlyRegex.test(postalCode)) {
-      return 'Postal code must contain only numbers';
+      return "Postal code must contain only numbers";
     }
     return true;
   }
@@ -15,11 +15,11 @@ export const validatePostalCode = (countryCode: string, postalCode: string) => {
   const regex = postalCodeRegexMap[countryCode];
 
   if (!regex.test(postalCode)) {
-    if (countryCode === 'US') {
-      return 'Invalid zip code format. Example: 12345 или 12345-6789';
+    if (countryCode === "US") {
+      return "Invalid zip code format. Example: 12345 или 12345-6789";
     }
-    if (countryCode === 'CA') {
-      return 'Invalid zip code format. Example: A1B 2C3';
+    if (countryCode === "CA") {
+      return "Invalid zip code format. Example: A1B 2C3";
     }
   }
 

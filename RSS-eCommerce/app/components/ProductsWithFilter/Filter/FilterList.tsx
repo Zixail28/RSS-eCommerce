@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./FilterList.module.scss";
 import { productsListServer } from "../../../data/users.data";
-import Button from "../../ui/button/button";
+import Button from "../../ui/Button/Button";
 import { FiltersItem, StateSort } from "../../../data/filters";
 
 const FilterList: React.FC<{
@@ -39,26 +39,32 @@ const FilterList: React.FC<{
       if (filterType === "brand") {
         return {
           ...prevFilters,
-          brand: value === "All Brands" || value === "" ? "All Brands" : value,
+          brand: String(
+            value === "All Brands" || value === "" ? "All Brands" : value,
+          ),
         };
       } else if (filterType === "color") {
         return {
           ...prevFilters,
-          color: value === "All Colors" || value === "" ? "All Colors" : value,
+          color: String(
+            value === "All Colors" || value === "" ? "All Colors" : value,
+          ),
         };
       } else if (filterType === "availability") {
         return {
           ...prevFilters,
-          availability:
+          availability: String(
             value === "All Availability" || value === ""
               ? "All Availability"
               : value,
+          ),
         };
       } else if (filterType === "discountToDay") {
         return {
           ...prevFilters,
-          discountToDay:
+          discountToDay: Boolean(
             value === "All Discount" || value === "" ? "All Discount" : value,
+          ),
         };
       }
       return prevFilters;

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ISearch } from "../../features/searchProductsSlice";
+import { ISearchProductsResponse } from "../../shared/interfaces/seacrhProducts.commercetools.interface";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 const PROJECT_KEY = import.meta.env.VITE_PROJECT_KEY;
@@ -8,7 +8,7 @@ const AUTH_BASE_URL = import.meta.env.VITE_AUTH_URL;
 const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
 const CLIENT_SECRET = import.meta.env.VITE_CLIENT_SECRET;
 
-type searchResponseData = ISearch[];
+type searchResponseData = ISearchProductsResponse;
 
 interface Credentials {
   searchText: string | null;

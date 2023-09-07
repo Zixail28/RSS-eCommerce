@@ -4,6 +4,8 @@ import Gallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import styles from "./PhotoModal.module.scss";
 
+type GalleryImage = { original: string };
+
 interface PhotoModalProps {
   isOpen: boolean;
   images: GalleryImage[];

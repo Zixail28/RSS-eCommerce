@@ -3,7 +3,7 @@ import FilterList from "./Filter/FilterList";
 import Products from "../../components/Product/Products";
 import styles from "./ProductsWithFilter.module.scss";
 import { productsListServer } from "../../data/users.data";
-import Button from "../../components/ui/button/button";
+import Button from "../ui/Button/Button";
 import { FiltersItem, StateSort } from "../../data/filters";
 
 interface ProductsProps {

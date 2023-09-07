@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
-import { RootState } from '../../store/store';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
+import { RootState } from "../../store/store";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 const PROJECT_KEY = import.meta.env.VITE_PROJECT_KEY;
@@ -20,7 +20,7 @@ export const changeAddress = createAsyncThunk<
   PassResponseData,
   Credentials,
   { rejectValue: string }
->('auth/changeAddress', async (credentials, thunkAPI) => {
+>("auth/changeAddress", async (credentials, thunkAPI) => {
   try {
     const state = thunkAPI.getState() as RootState;
     const { id, token, version } = state.auth;
@@ -31,7 +31,7 @@ export const changeAddress = createAsyncThunk<
         version: version,
         actions: [
           {
-            action: 'changeAddress',
+            action: "changeAddress",
             addressId: credentials.addressId,
             address: {
               country: credentials.country,
@@ -43,29 +43,29 @@ export const changeAddress = createAsyncThunk<
 
           credentials.defaultShippingAddressId
             ? {
-                action: 'setDefaultShippingAddress',
+                action: "setDefaultShippingAddress",
                 addressId: credentials.addressId,
               }
             : {
-                action: 'removeShippingAddressId',
+                action: "removeShippingAddressId",
                 addressId: credentials.addressId,
               },
           {
-            action: 'addShippingAddressId',
+            action: "addShippingAddressId",
             addressId: credentials.addressId,
           },
 
           credentials.defaultBillingAddressId
             ? {
-                action: 'setDefaultBillingAddress',
+                action: "setDefaultBillingAddress",
                 addressId: credentials.addressId,
               }
             : {
-                action: 'removeBillingAddressId',
+                action: "removeBillingAddressId",
                 addressId: credentials.addressId,
               },
           {
-            action: 'addBillingAddressId',
+            action: "addBillingAddressId",
             addressId: credentials.addressId,
           },
         ],
@@ -73,9 +73,9 @@ export const changeAddress = createAsyncThunk<
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     const getCustomer = await axios.get(
@@ -83,12 +83,12 @@ export const changeAddress = createAsyncThunk<
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-      }
+      },
     );
 
-    toast.success('The address data has been updated successfully!');
+    toast.success("The address data has been updated successfully!");
 
     return { ...changeAddressRequest.data, ...getCustomer.data };
   } catch (e) {

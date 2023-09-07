@@ -1,12 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { authenticate } from '../../services/auth/authThunk';
-import { RootState } from '../../store/store';
-import { register } from '../../services/auth/registerThunk';
-import { changePassword } from '../../services/auth/changePasswordThunk';
-import { changeInfo } from '../../services/auth/changeInfoThunk';
-import { deleteAddress } from '../../services/auth/deleteAddressThunk';
-import { changeAddress } from '../../services/auth/changeAddressThunk';
-import { addNewAddress } from '../../services/auth/addNewAddressThunk';
+import { createSlice } from "@reduxjs/toolkit";
+import { authenticate } from "../../services/auth/authThunk";
+import { RootState } from "../../store/store";
+import { register } from "../../services/auth/registerThunk";
+import { changePassword } from "../../services/auth/changePasswordThunk";
+import { changeInfo } from "../../services/auth/changeInfoThunk";
+import { deleteAddress } from "../../services/auth/deleteAddressThunk";
+import { changeAddress } from "../../services/auth/changeAddressThunk";
+import { addNewAddress } from "../../services/auth/addNewAddressThunk";
 
 export interface AuthState {
   email: string | null;
@@ -25,23 +25,23 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-  email: '',
-  firstName: '',
-  lastName: '',
-  dateOfBirth: '',
+  email: "",
+  firstName: "",
+  lastName: "",
+  dateOfBirth: "",
   addresses: [],
-  defaultShippingAddressId: '',
-  defaultBillingAddressId: '',
+  defaultShippingAddressId: "",
+  defaultBillingAddressId: "",
   shippingAddressIds: [],
   billingAddressIds: [],
   isAuth: false,
-  id: '',
-  token: '',
+  id: "",
+  token: "",
   version: 0,
 };
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     clearAuthState: () => initialState,
@@ -57,9 +57,9 @@ export const authSlice = createSlice({
       state.dateOfBirth = payload.customer.dateOfBirth;
       state.addresses = payload.customer.addresses;
       state.defaultShippingAddressId =
-        payload.customer.defaultShippingAddressId || '';
+        payload.customer.defaultShippingAddressId || "";
       state.defaultBillingAddressId =
-        payload.customer.defaultBillingAddressId || '';
+        payload.customer.defaultBillingAddressId || "";
       state.shippingAddressIds = payload.customer.shippingAddressIds;
       state.billingAddressIds = payload.customer.billingAddressIds;
       state.isAuth = true;
@@ -76,8 +76,8 @@ export const authSlice = createSlice({
       state.lastName = payload.lastName;
       state.dateOfBirth = payload.dateOfBirth;
       state.addresses = payload.addresses;
-      state.defaultShippingAddressId = payload.defaultShippingAddressId || '';
-      state.defaultBillingAddressId = payload.defaultBillingAddressId || '';
+      state.defaultShippingAddressId = payload.defaultShippingAddressId || "";
+      state.defaultBillingAddressId = payload.defaultBillingAddressId || "";
       state.shippingAddressIds = payload.shippingAddressIds;
       state.billingAddressIds = payload.billingAddressIds;
       state.isAuth = true;
@@ -106,8 +106,8 @@ export const authSlice = createSlice({
       const payload = action.payload;
 
       state.addresses = payload.addresses;
-      state.defaultShippingAddressId = payload.defaultShippingAddressId || '';
-      state.defaultBillingAddressId = payload.defaultBillingAddressId || '';
+      state.defaultShippingAddressId = payload.defaultShippingAddressId || "";
+      state.defaultBillingAddressId = payload.defaultBillingAddressId || "";
       state.shippingAddressIds = payload.shippingAddressIds;
       state.billingAddressIds = payload.billingAddressIds;
       state.version = payload.version;
@@ -117,8 +117,8 @@ export const authSlice = createSlice({
       const payload = action.payload;
 
       state.addresses = payload.addresses;
-      state.defaultShippingAddressId = payload.defaultShippingAddressId || '';
-      state.defaultBillingAddressId = payload.defaultBillingAddressId || '';
+      state.defaultShippingAddressId = payload.defaultShippingAddressId || "";
+      state.defaultBillingAddressId = payload.defaultBillingAddressId || "";
       state.shippingAddressIds = payload.shippingAddressIds;
       state.billingAddressIds = payload.billingAddressIds;
       state.version = payload.version;
@@ -128,8 +128,8 @@ export const authSlice = createSlice({
       const payload = action.payload;
 
       state.addresses = payload.addresses;
-      state.defaultShippingAddressId = payload.defaultShippingAddressId || '';
-      state.defaultBillingAddressId = payload.defaultBillingAddressId || '';
+      state.defaultShippingAddressId = payload.defaultShippingAddressId || "";
+      state.defaultBillingAddressId = payload.defaultBillingAddressId || "";
       state.shippingAddressIds = payload.shippingAddressIds;
       state.billingAddressIds = payload.billingAddressIds;
       state.version = payload.version;

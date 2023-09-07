@@ -40,10 +40,8 @@ const Home: FC = () => {
   }, [dispatch]);
 
   const productsList: ProductItem[] = [];
-
   for (let i = 0; i < productsAllList.length; i++) {
     const productData = productsAllList[i];
-
     const images: string[] = [];
     const imagesAll = productData.masterData.current.masterVariant.images;
     for (let k = 0; k < imagesAll.length; k++) {
@@ -71,7 +69,7 @@ const Home: FC = () => {
     if (productData.masterData.current.categories[0]) {
       const categoryId = productData.masterData.current.categories[0].id;
       const foundCategory = categoriesServer.find(
-        (category) => category.id === categoryId,
+        (category) => category.id === Number(categoryId),
       );
 
       if (foundCategory) {

@@ -1,15 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchProducts } from "../services/products/productsThunk";
-
-export interface Products {
-  name: {
-    "en-US": string;
-  };
-}
+import { IProduct } from "../shared/interfaces/products.commercetools.interface";
 
 export interface ProductsState {
   products: {
-    results: Products[];
+    results: IProduct[];
   };
 }
 

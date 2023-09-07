@@ -69,7 +69,7 @@ type RegisterResponseData = {
   defaultBillingAddressId: string | null;
   defaultShippingAddressId: string | null;
   addresses: [];
-  customer: any;
+  //customer: any;
   id: string | null;
   dateOfBirth: string | null;
   token: string | null;

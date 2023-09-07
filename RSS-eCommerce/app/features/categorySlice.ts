@@ -1,11 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchCategories } from "../services/category/categoryThunk";
-
-export interface Category {
-  name: {
-    "en-US": string;
-  };
-}
+import { Category } from "../shared/interfaces/categories.commercetools.interface";
 
 export interface CategoryState {
   categories: {

@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const AUTH_BASE_URL = import.meta.env.VITE_AUTH_URL;
 const API_BASE_URL = import.meta.env.VITE_API_URL;
@@ -30,7 +30,7 @@ const createAxiosInstance = (token: string) =>
     baseURL: `${API_BASE_URL}/${PROJECT_KEY}`,
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
 
@@ -38,7 +38,7 @@ export const register = createAsyncThunk<
   RegisterResponseData,
   Credentials,
   { rejectValue: string }
->('auth/register', async (credentials, thunkAPI) => {
+>("auth/register", async (credentials, thunkAPI) => {
   try {
     const authResponse = await axios.post(
       `${AUTH_BASE_URL}/oauth/token?grant_type=client_credentials`,
@@ -49,14 +49,14 @@ export const register = createAsyncThunk<
       {
         headers: {
           Authorization: `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`,
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-      }
+      },
     );
 
     const token = authResponse.data.access_token;
 
-    const customerData = await createAxiosInstance(token).post('/customers', {
+    const customerData = await createAxiosInstance(token).post("/customers", {
       email: credentials.email,
       firstName: credentials.firstName,
       lastName: credentials.lastName,
@@ -69,11 +69,11 @@ export const register = createAsyncThunk<
         version: customerData.data.customer.version,
         actions: [
           {
-            action: 'setDateOfBirth',
+            action: "setDateOfBirth",
             dateOfBirth: credentials.dateOfBirth,
           },
           {
-            action: 'addAddress',
+            action: "addAddress",
             address: {
               streetName: credentials.shippingStreet,
               postalCode: credentials.shippingPostalCode,
@@ -82,7 +82,7 @@ export const register = createAsyncThunk<
             },
           },
           {
-            action: 'addAddress',
+            action: "addAddress",
             address: {
               streetName: credentials.billingStreet,
               postalCode: credentials.billingPostalCode,
@@ -91,7 +91,7 @@ export const register = createAsyncThunk<
             },
           },
         ],
-      }
+      },
     );
 
     const setAddresses = await createAxiosInstance(token).post(
@@ -100,15 +100,15 @@ export const register = createAsyncThunk<
         version: updateCustomerAddress.data.version,
         actions: [
           {
-            action: 'addShippingAddressId',
+            action: "addShippingAddressId",
             addressId: updateCustomerAddress.data.addresses[0].id,
           },
           {
-            action: 'addBillingAddressId',
+            action: "addBillingAddressId",
             addressId: updateCustomerAddress.data.addresses[1].id,
           },
         ],
-      }
+      },
     );
 
     if (credentials.useDefaultAddress) {
@@ -118,16 +118,16 @@ export const register = createAsyncThunk<
           version: setAddresses.data.version,
           actions: [
             {
-              action: 'setDefaultShippingAddress',
+              action: "setDefaultShippingAddress",
               addressId: updateCustomerAddress.data.addresses[0].id,
             },
           ],
-        }
+        },
       );
     }
 
     const response = await createAxiosInstance(token).get(
-      `/customers/${customerData.data.customer.id}`
+      `/customers/${customerData.data.customer.id}`,
     );
 
     return { ...response.data, token };
@@ -143,7 +143,7 @@ export const register = createAsyncThunk<
     }
 
     const errorMessage =
-      error.response?.data?.message ?? 'An error occurred during registration.';
+      error.response?.data?.message ?? "An error occurred during registration.";
 
     return thunkAPI.rejectWithValue(errorMessage);
   }

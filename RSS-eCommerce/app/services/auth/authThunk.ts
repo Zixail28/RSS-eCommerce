@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const AUTH_BASE_URL = import.meta.env.VITE_AUTH_URL;
 const API_BASE_URL = import.meta.env.VITE_API_URL;
@@ -17,7 +17,7 @@ export const authenticate = createAsyncThunk<
   AuthenticateResponseData,
   Credentials,
   { rejectValue: string }
->('auth/authenticate', async (credentials, thunkAPI) => {
+>("auth/authenticate", async (credentials, thunkAPI) => {
   try {
     const tokenData = await axios.post(
       `${AUTH_BASE_URL}/oauth/${PROJECT_KEY}/customers/token?grant_type=password&username=${credentials.email}&password=${credentials.password}`,
@@ -28,9 +28,9 @@ export const authenticate = createAsyncThunk<
       {
         headers: {
           Authorization: `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`,
-          'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-      }
+      },
     );
 
     const response = await axios.post(
@@ -39,16 +39,16 @@ export const authenticate = createAsyncThunk<
         email: credentials.email,
         password: credentials.password,
         anonymousCart: {
-          id: '{{cart-id}}',
-          typeId: 'cart',
+          id: "{{cart-id}}",
+          typeId: "cart",
         },
       },
       {
         headers: {
           Authorization: `Bearer ${tokenData.data.access_token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     return {
@@ -59,12 +59,12 @@ export const authenticate = createAsyncThunk<
     const error = e as ApiError;
 
     if (error.response.data.statusCode === 400) {
-      toast.error('email or password is incorrect');
+      toast.error("email or password is incorrect");
     }
 
     const errorMessage =
       error.response?.data?.message ??
-      'An error occurred during authentication.';
+      "An error occurred during authentication.";
 
     return thunkAPI.rejectWithValue(errorMessage);
   }

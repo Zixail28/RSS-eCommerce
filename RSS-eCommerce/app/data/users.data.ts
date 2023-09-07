@@ -11,7 +11,7 @@ export type FiltItem = {
 };
 
 export type ProductItem = {
-  id: number;
+  id: string;
   images: string[];
   name: string;
   category: string;

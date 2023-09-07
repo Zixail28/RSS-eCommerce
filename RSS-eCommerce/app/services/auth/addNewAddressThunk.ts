@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
-import { RootState } from '../../store/store';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
+import { RootState } from "../../store/store";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 const PROJECT_KEY = import.meta.env.VITE_PROJECT_KEY;
@@ -22,7 +22,7 @@ const createAxiosInstance = (token: string | null) =>
     baseURL: `${API_BASE_URL}/${PROJECT_KEY}`,
     headers: {
       Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
 
@@ -30,7 +30,7 @@ export const addNewAddress = createAsyncThunk<
   addressResponceData,
   Credentials,
   { rejectValue: string }
->('auth/addNewAddress', async (credentials, thunkAPI) => {
+>("auth/addNewAddress", async (credentials, thunkAPI) => {
   try {
     const state = thunkAPI.getState() as RootState;
     const { id, token, version } = state.auth;
@@ -41,7 +41,7 @@ export const addNewAddress = createAsyncThunk<
         version: version,
         actions: [
           {
-            action: 'addAddress',
+            action: "addAddress",
             address: {
               postalCode: credentials.newPostalCode,
               city: credentials.newCity,
@@ -50,7 +50,7 @@ export const addNewAddress = createAsyncThunk<
             },
           },
         ],
-      }
+      },
     );
 
     let updateAddress = null;
@@ -63,7 +63,7 @@ export const addNewAddress = createAsyncThunk<
           actions: [
             credentials.newShippingAddress
               ? {
-                  action: 'addShippingAddressId',
+                  action: "addShippingAddressId",
                   addressId:
                     newAddressResponse.data.addresses[
                       newAddressResponse.data.addresses.length - 1
@@ -73,7 +73,7 @@ export const addNewAddress = createAsyncThunk<
 
             credentials.newBillingAddress
               ? {
-                  action: 'addBillingAddressId',
+                  action: "addBillingAddressId",
                   addressId:
                     newAddressResponse.data.addresses[
                       newAddressResponse.data.addresses.length - 1
@@ -81,7 +81,7 @@ export const addNewAddress = createAsyncThunk<
                 }
               : null,
           ].filter(Boolean),
-        }
+        },
       );
     }
 
@@ -99,7 +99,7 @@ export const addNewAddress = createAsyncThunk<
           actions: [
             credentials.newDefaultShippingAddress
               ? {
-                  action: 'setDefaultShippingAddress',
+                  action: "setDefaultShippingAddress",
                   addressId:
                     newAddressResponse.data.addresses[
                       newAddressResponse.data.addresses.length - 1
@@ -109,7 +109,7 @@ export const addNewAddress = createAsyncThunk<
 
             credentials.newDefaultBillingAddress
               ? {
-                  action: 'setDefaultBillingAddress',
+                  action: "setDefaultBillingAddress",
                   addressId:
                     newAddressResponse.data.addresses[
                       newAddressResponse.data.addresses.length - 1
@@ -117,11 +117,11 @@ export const addNewAddress = createAsyncThunk<
                 }
               : null,
           ].filter(Boolean),
-        }
+        },
       );
     }
 
-    toast.success('New address successfully added!');
+    toast.success("New address successfully added!");
 
     return {
       ...newAddressResponse.data,

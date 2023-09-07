@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
-import { RootState } from '../../store/store';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
+import { RootState } from "../../store/store";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 const PROJECT_KEY = import.meta.env.VITE_PROJECT_KEY;
@@ -14,7 +14,7 @@ export const deleteAddress = createAsyncThunk<
   PassResponseData,
   Credentials,
   { rejectValue: string }
->('auth/deleteAddress', async (credentials, thunkAPI) => {
+>("auth/deleteAddress", async (credentials, thunkAPI) => {
   try {
     const state = thunkAPI.getState() as RootState;
     const { id, token, version } = state.auth;
@@ -25,7 +25,7 @@ export const deleteAddress = createAsyncThunk<
         version: version,
         actions: [
           {
-            action: 'removeAddress',
+            action: "removeAddress",
             addressId: credentials.addressId,
           },
         ],
@@ -33,9 +33,9 @@ export const deleteAddress = createAsyncThunk<
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     const getCustomer = await axios.get(
@@ -43,12 +43,12 @@ export const deleteAddress = createAsyncThunk<
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-      }
+      },
     );
 
-    toast.success('Address was successfully deleted!');
+    toast.success("Address was successfully deleted!");
 
     return { ...response.data, ...getCustomer.data };
   } catch (e) {

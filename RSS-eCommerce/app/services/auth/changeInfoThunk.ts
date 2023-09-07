@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
-import { RootState } from '../../store/store';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
+import { RootState } from "../../store/store";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 const PROJECT_KEY = import.meta.env.VITE_PROJECT_KEY;
@@ -17,7 +17,7 @@ export const changeInfo = createAsyncThunk<
   PassResponseData,
   Credentials,
   { rejectValue: string }
->('auth/changeInfo', async (credentials, thunkAPI) => {
+>("auth/changeInfo", async (credentials, thunkAPI) => {
   try {
     const state = thunkAPI.getState() as RootState;
     const { id, token, version } = state.auth;
@@ -28,19 +28,19 @@ export const changeInfo = createAsyncThunk<
         version: version,
         actions: [
           {
-            action: 'setFirstName',
+            action: "setFirstName",
             firstName: credentials.firstName,
           },
           {
-            action: 'setLastName',
+            action: "setLastName",
             lastName: credentials.lastName,
           },
           {
-            action: 'setDateOfBirth',
+            action: "setDateOfBirth",
             dateOfBirth: credentials.dateOfBirth,
           },
           {
-            action: 'changeEmail',
+            action: "changeEmail",
             email: credentials.email,
           },
         ],
@@ -48,9 +48,9 @@ export const changeInfo = createAsyncThunk<
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     const getCustomer = await axios.get(
@@ -58,12 +58,12 @@ export const changeInfo = createAsyncThunk<
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-      }
+      },
     );
 
-    toast.success('Personal information was successfully updated!');
+    toast.success("Personal information was successfully updated!");
 
     return { ...changeInfoRequest.data, ...getCustomer.data };
   } catch (e) {

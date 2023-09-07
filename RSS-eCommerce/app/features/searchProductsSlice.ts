@@ -1,20 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { searchProducts } from "../services/searchProductsThunk/searchProductsThunk";
+import { ISearchProductsResponse } from "../shared/interfaces/seacrhProducts.commercetools.interface";
 
-export interface ISearch {
-  id: string;
-  name: {
-    "en-US": string;
-  };
-  version: number;
-}
-
-export interface SearchState {
-  products: ISearch[];
+interface SearchState {
+  products: ISearchProductsResponse;
 }
 
 const initialState: SearchState = {
-  products: [],
+  products: {
+    limit: 0,
+    offset: 0,
+    count: 0,
+    total: 0,
+    results: [],
+    facets: {},
+  },
 };
 
 export const searchProductsSlice = createSlice({

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import Button from "../../components/ui/button/button";
+import Button from "../../components/ui/Button/Button";
 import PhotoModal from "./PhotoModal/PhotoModal";
 import freeDelivery from "../../assets/images/freeDelivery.svg";
 import returnDelivery from "../../assets/images/returnDelivery.svg";
@@ -133,7 +133,7 @@ const Product = () => {
           <div
             className={styles.current}
             style={{ backgroundImage: `url(${currentImage})` }}
-            onClick={() => openModal({ currentImage })}
+            onClick={() => openModal()} // было onClick={() => openModal({ currentImage })}
           />
         </div>
 

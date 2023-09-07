@@ -20,7 +20,7 @@ const Sidebar = () => {
     if (categories.length > 0) {
       setCategoriesServer(
         categories.map((category) => ({
-          id: category.id,
+          id: Number(category.id),
           name: category.name["en-US"],
         })),
       );
