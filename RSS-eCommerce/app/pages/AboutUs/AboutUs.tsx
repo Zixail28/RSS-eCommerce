@@ -1,0 +1,98 @@
+import { FC } from "react";
+import styles from "./AboutUs.module.scss";
+import photoDenis from "../../assets/images/freeDelivery.svg";
+import photoIhor from "../../assets/images/freeDelivery.svg";
+import photoLiza from "../../assets/images/photo_Liza.png";
+import { Link } from "react-router-dom";
+
+const AboutUs: FC = () => {
+  return (
+    <>
+      <section className={styles.wrapper}>
+        <section className={styles.cardDeveloper}>
+          <img src={photoDenis} alt="Denis" className={styles.foto} />
+          <div className={styles.info}>
+            <h2>Denis</h2>
+            <h3 className={styles.role}>Team lead</h3>
+            <p>
+              Introduce your development team in a detailed manner. The
+              introduction should not only highlight each team member's
+              contributions to the project and the effective collaboration
+              methods that led to the creation of the successful product , but
+              also present each member's name.
+            </p>
+            <Link to={"https://github.com/Zixail28"} target="_blank">
+              @Zixail28
+            </Link>
+            <h3>Contributions</h3>
+            <ul>
+              <li>Repository Setup</li>
+              <li>Development Environment Configuration</li>
+              <li>Development Scripts</li>
+              <li>Comprehensive README</li>
+              <li>Basket Page</li>
+              <li>Routing</li>
+            </ul>
+          </div>
+        </section>
+        <section className={styles.cardDeveloper}>
+          <img src={photoIhor} alt="Ihor Serhiienko" className={styles.foto} />
+          <div className={styles.info}>
+            <h2>Ihor Serhiienko</h2>
+            <h3 className={styles.role}>Front-end developer</h3>
+            <p>
+              "I'm an aspiring developer passionate about JavaScript and React,
+              crafting user-friendly web apps. I explore the latest JavaScript
+              and React features to enhance web development.
+            </p>
+            <p>
+              It's my calling to thrive in JavaScript and React, creating
+              creative and practical projects."
+            </p>
+            <Link to={"https://github.com/ISerhiienko"} target="_blank">
+              @ISerhiienko
+            </Link>
+            <h3>Contributions</h3>
+            <ul>
+              <li>CommerceTools Project and API Client Setup</li>
+              <li>Login Page</li>
+              <li>Registration Page</li>
+              <li>User Profile Page</li>
+              <li>Detailed Product Page</li>
+            </ul>
+          </div>
+        </section>
+        <section className={styles.cardDeveloper}>
+          <img
+            src={photoLiza}
+            alt="Lizaveta Nikiforova"
+            className={styles.foto}
+          />
+          <div className={styles.info}>
+            <h2>Lizaveta Nikiforova</h2>
+            <h3 className={styles.role}>Front-end developer</h3>
+            <p>
+              "I'm a junior in front-end development using Java-script. My goal
+              is to learn how to create convenient and useful applications. This
+              is my first project using React.
+            </p>
+            <p>I love programming and I want my work to benefit people."</p>
+            <Link to={"https://github.com/LizavetaNik"} target="_blank">
+              @LizavetaNik
+            </Link>
+            <h3>Contributions</h3>
+            <ul>
+              <li>Task Board Setup - Jira</li>
+              <li>Main Page</li>
+              <li>Catalog Page</li>
+              <li>Detailed Product Page</li>
+              <li>About Us Page</li>
+            </ul>
+          </div>
+        </section>
+      </section>
+    </>
+  );
+};
+
+export default AboutUs;
