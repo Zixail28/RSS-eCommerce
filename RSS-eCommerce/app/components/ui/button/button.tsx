@@ -1,10 +1,20 @@
-import { FC } from 'react';
-import { ButtonProps } from '../../../shared/interfaces/button.interface';
-import style from '../button/Button.module.scss';
+import { FC } from "react";
+import { ButtonProps } from "../../../shared/interfaces/button.interface";
+import style from "../Button/Button.module.scss";
 
-const Button: FC<ButtonProps> = ({ onClick, children, type = 'button' }) => {
+const Button: FC<ButtonProps> = ({
+  onClick,
+  children,
+  type = "button",
+  color = "red",
+}) => {
   return (
-    <button type={type} className={style.button} onClick={onClick}>
+    <button
+      type={type}
+      color={color}
+      className={style.button}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

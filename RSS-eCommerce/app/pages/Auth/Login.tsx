@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
-import Button from "../../components/ui/Button/Button";
 import Input from "../../components/ui/Input/Input";
+import Button from "../../components/ui/Button/Button";
 import style from "../Auth/Auth.module.scss";
 import authImg from "../../assets/images/auth.jpg";
 import { authenticate } from "../../services/auth/authThunk";
@@ -51,47 +51,51 @@ const Login: FC = () => {
           <h1 className={style.login__title}>Log in to Exclusive</h1>
           <p className={style.login__subtitle}>Enter your details below</p>
           <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
-            <Controller
-              name="email"
-              control={control}
-              rules={{
-                required: "Email is required",
-                validate: validateEmail,
-              }}
-              render={({ field }) => (
-                <>
-                  <Input
-                    {...field}
-                    type="text"
-                    placeholder="Email"
-                    value={field.value}
-                    error={errors.email?.message}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    onBlur={field.onBlur}
-                  />
-                </>
-              )}
-            />
-            <Controller
-              name="password"
-              control={control}
-              rules={{
-                required: "Password is required",
-                validate: validatePassword,
-              }}
-              render={({ field }) => (
-                <>
-                  <Input
-                    {...field}
-                    type="password"
-                    placeholder="Password"
-                    showPasswordIcon={true}
-                    error={errors.password?.message}
-                    onChange={(e) => field.onChange(e.target.value)}
-                  />
-                </>
-              )}
-            />
+            <div className={style.form_col_2}>
+              <Controller
+                name="email"
+                control={control}
+                rules={{
+                  required: "Email is required",
+                  validate: validateEmail,
+                }}
+                render={({ field }) => (
+                  <>
+                    <Input
+                      {...field}
+                      type="text"
+                      placeholder="Email"
+                      value={field.value}
+                      error={errors.email?.message}
+                      onChange={(e) => field.onChange(e.target.value)}
+                      onBlur={field.onBlur}
+                    />
+                  </>
+                )}
+              />
+            </div>
+            <div className={style.form_col_2}>
+              <Controller
+                name="password"
+                control={control}
+                rules={{
+                  required: "Password is required",
+                  validate: validatePassword,
+                }}
+                render={({ field }) => (
+                  <>
+                    <Input
+                      {...field}
+                      type="password"
+                      placeholder="Password"
+                      showPasswordIcon={true}
+                      error={errors.password?.message}
+                      onChange={(e) => field.onChange(e.target.value)}
+                    />
+                  </>
+                )}
+              />
+            </div>
             <Button type="submit">Log in</Button>
             <div className={style.link}>
               Don't have an account yet?
