@@ -69,7 +69,7 @@ const Home: FC = () => {
     if (productData.masterData.current.categories[0]) {
       const categoryId = productData.masterData.current.categories[0].id;
       const foundCategory = categoriesServer.find(
-        (category) => category.id === Number(categoryId),
+        (category) => category.id === categoryId,
       );
 
       if (foundCategory) {
@@ -172,7 +172,6 @@ const Home: FC = () => {
       priceOld: priceOld,
       filter: filters,
     };
-
     productsList.push(productItem);
   }
 

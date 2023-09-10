@@ -43,6 +43,8 @@ const Products: FC<ProductsProps> = ({
   } else if (sortPriceDirection === StateSort.descending) {
     list.sort((a, b) => b.price - a.price);
   }
+  //console.log("products list ", list);
+  // console.log("filters ", filters);
 
   if (filters && searchFilter === undefined) {
     list = list.filter((product) => {
@@ -81,7 +83,6 @@ const Products: FC<ProductsProps> = ({
       );
     });
   }
-
   list = list.slice(start, start + amount);
 
   return (
