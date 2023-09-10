@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./AboutUs.module.scss";
-import photoDenis from "../../assets/images/freeDelivery.svg";
-import photoIhor from "../../assets/images/freeDelivery.svg";
+import photoDenis from "../../assets/images/photo_Denis.jfif";
+import photoIhor from "../../assets/images/photo_Ihor.jpg";
 import photoLiza from "../../assets/images/photo_Liza.png";
 import { Link } from "react-router-dom";
 
@@ -10,16 +10,13 @@ const AboutUs: FC = () => {
     <>
       <section className={styles.wrapper}>
         <section className={styles.cardDeveloper}>
-          <img src={photoDenis} alt="Denis" className={styles.foto} />
+          <img src={photoDenis} alt="Denis Bezgubov" className={styles.foto} />
           <div className={styles.info}>
-            <h2>Denis</h2>
+            <h2>Denis Bezgubov</h2>
             <h3 className={styles.role}>Team lead</h3>
             <p>
-              Introduce your development team in a detailed manner. The
-              introduction should not only highlight each team member's
-              contributions to the project and the effective collaboration
-              methods that led to the creation of the successful product , but
-              also present each member's name.
+              "I studied frontend at RSSchools for more than a year, at the same
+              time I was self-taught in the field of web development."
             </p>
             <Link to={"https://github.com/Zixail28"} target="_blank">
               @Zixail28
@@ -48,8 +45,9 @@ const AboutUs: FC = () => {
             <p>
               I explore the latest JavaScript features to enhance web
               development. It's my calling to excel in JavaScript and React,
-              crafting creative and practical projects."
+              crafting creative and practical projects.
             </p>
+            <p>I studied frontend at RSSchools from 2022."</p>
             <Link to={"https://github.com/ISerhiienko"} target="_blank">
               @ISerhiienko
             </Link>
@@ -77,7 +75,8 @@ const AboutUs: FC = () => {
               is to learn how to create convenient and useful applications. This
               is my first project using React."
             </p>
-            <p>I love programming and I want my work to benefit people."</p>
+            <p>I love programming and I want my work to benefit people.</p>
+            <p>I studied frontend at RSSchools from 2022."</p>
             <Link to={"https://github.com/LizavetaNik"} target="_blank">
               @LizavetaNik
             </Link>
@@ -107,6 +106,10 @@ const AboutUs: FC = () => {
               sections: materials - only the necessary links for the project;
               git - description and solution of problems associated with the
               git; all - for discussing general topics.
+            </li>
+            <li>
+              GitHub. We used GitHub for parallel development and saving the
+              history of project changes.
             </li>
             <li>Meeting. The team met regularly through the Discor channel.</li>
           </ul>
