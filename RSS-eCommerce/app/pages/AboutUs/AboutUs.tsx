@@ -41,13 +41,14 @@ const AboutUs: FC = () => {
             <h2>Ihor Serhiienko</h2>
             <h3 className={styles.role}>Front-end developer</h3>
             <p>
-              "I'm an aspiring developer passionate about JavaScript and React,
-              crafting user-friendly web apps. I explore the latest JavaScript
-              and React features to enhance web development.
+              "I am a beginner front end developer, passionate about learning
+              JavaScript, and I particularly enjoy creating web interfaces using
+              React.
             </p>
             <p>
-              It's my calling to thrive in JavaScript and React, creating
-              creative and practical projects."
+              I explore the latest JavaScript features to enhance web
+              development. It's my calling to excel in JavaScript and React,
+              crafting creative and practical projects."
             </p>
             <Link to={"https://github.com/ISerhiienko"} target="_blank">
               @ISerhiienko
@@ -74,7 +75,7 @@ const AboutUs: FC = () => {
             <p>
               "I'm a junior in front-end development using Java-script. My goal
               is to learn how to create convenient and useful applications. This
-              is my first project using React.
+              is my first project using React."
             </p>
             <p>I love programming and I want my work to benefit people."</p>
             <Link to={"https://github.com/LizavetaNik"} target="_blank">
@@ -89,6 +90,26 @@ const AboutUs: FC = () => {
               <li>About Us Page</li>
             </ul>
           </div>
+        </section>
+        <section className={styles.collaboration}>
+          <h2>Collaboration </h2>
+          <p>
+            This is a list of tools that the team used to implement the project
+            and achieve a successful result.
+          </p>
+          <ul>
+            <li>
+              Jira. All sprint tasks were described in Jira and responsible
+              persons were assigned.
+            </li>
+            <li>
+              Discord. A channel was created in Diskoret. The channel had
+              sections: materials - only the necessary links for the project;
+              git - description and solution of problems associated with the
+              git; all - for discussing general topics.
+            </li>
+            <li>Meeting. The team met regularly through the Discor channel.</li>
+          </ul>
         </section>
       </section>
     </>
