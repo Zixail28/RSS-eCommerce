@@ -8,6 +8,7 @@ import Register from "../../pages/Auth/Register";
 import Profile from "../../pages/Profile/Profile";
 import Categories from "../../pages/Categories/Categories";
 import Product from "../../pages/Product/Product";
+import AboutUs from "../../pages/AboutUs/AboutUs";
 import { PublicRoute } from "../../routes/PublicRoute";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             path="/product/:productName/:productId"
             element={<Product />}
           />
+          <Route path="/about" element={<AboutUs />} />
           <Route path="*" element={<PageNotFound />}></Route>
         </Route>
       </Routes>
