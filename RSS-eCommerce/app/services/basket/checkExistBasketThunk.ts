@@ -71,7 +71,6 @@ export const checkExistBasketThunk = createAsyncThunk(
             changeTaxBasketThunk({ id: basket.id, version: basket.version }),
           )
         ).payload;
-        console.log("basket", basketNew);
         await axios.post(
           `${API_BASE_URL}/${PROJECT_KEY}/carts/${basketNew.id}`,
           {

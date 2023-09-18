@@ -5,15 +5,15 @@
 
   & > div {
     display: flex;
-    width: calc(25% - 4rem);
+    width: 25%;
 
-    p {
+    span {
       width: 100%;
       align-self: center;
       text-align: left !important;
     }
   }
-  p {
+  span {
     font-weight: 600;
     width: 25%;
     text-align: center;

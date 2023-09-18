@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Button from "../../components/ui/Button/Button";
 import PhotoModal from "./PhotoModal/PhotoModal";
@@ -10,10 +10,10 @@ import { productsListServer } from "../../data/users.data";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { fetchProduct } from "../../services/products/productThunk";
 import { addProductToBasketThunk } from "../../services/basket/addProductToBusket";
+import { removeProductInBasketThunk } from "../../services/basket/removeProductInBasket";
 
 const Product = () => {
   const { productName, productId } = useParams();
-  const navigate = useNavigate();
 
   const product = productsListServer.find(
     (product) => product.name === productName,
@@ -23,7 +23,7 @@ const Product = () => {
   const { lineItems } = useAppSelector((state) => state.basket.cart);
 
   const [currentImage, setCurrentImage] = useState<string>("");
-  const [quantity, setQuantity] = useState<number>(1);
+  //const [quantity, setQuantity] = useState<number>(1);
   const [selectedBrand, setSelectedBrand] = useState<string>(
     product?.filter.brand[0] || "",
   );
@@ -88,19 +88,26 @@ const Product = () => {
     setSelectedColor(product?.filter.color[0] || "");
   }, [product]);
 
-  const handleClick = async () => {
+  const handleAddClick = async () => {
     await dispatch(addProductToBasketThunk(productId as string));
   };
 
-  const incrementQuantity = () => {
-    setQuantity(quantity + 1);
+  const handleRemoveClick = async () => {
+    const lineItemId = lineItems.find(
+      (line) => line.productId == productId?.split("=")[1],
+    ).id;
+    await dispatch(removeProductInBasketThunk(lineItemId as string));
   };
 
-  const decrementQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
+  // const incrementQuantity = () => {
+  //   setQuantity(quantity + 1);
+  // };
+
+  // const decrementQuantity = () => {
+  //   if (quantity > 1) {
+  //     setQuantity(quantity - 1);
+  //   }
+  // };
 
   const handleBrandChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedBrand(event.target.value);
@@ -120,7 +127,7 @@ const Product = () => {
       undefined
     ) {
       return (
-        <Button type="button" onClick={handleClick}>
+        <Button type="button" onClick={handleAddClick}>
           Add to cart
         </Button>
       );
@@ -128,14 +135,15 @@ const Product = () => {
       return (
         <Button
           type="button"
-          onClick={() => navigate("/cart")}
+          onClick={handleRemoveClick}
           styles={{
             background: "#fff",
             color: "#db4444",
             border: "1px solid #db4444",
+            fontSize: ".95rem",
           }}
         >
-          Already in cart
+          Remove from Cart
         </Button>
       );
     }
@@ -218,7 +226,7 @@ const Product = () => {
           <div className={styles.block}></div>
 
           <div className={styles.actions}>
-            <div className={styles.quantity}>
+            {/* <div className={styles.quantity}>
               <button
                 className={styles.minusQuantity}
                 onClick={decrementQuantity}
@@ -232,7 +240,7 @@ const Product = () => {
               >
                 +
               </button>
-            </div>
+            </div> */}
             {renderBtn()}
             <span className={styles.cart}></span>
           </div>

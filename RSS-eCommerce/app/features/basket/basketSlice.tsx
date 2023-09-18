@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { checkExistBasketThunk } from "../../services/basket/checkExistBasketThunk";
 import { addProductToBasketThunk } from "../../services/basket/addProductToBusket";
+import { removeProductInBasketThunk } from "../../services/basket/removeProductInBasket";
 
 interface SearchState {
   cart: {
@@ -30,6 +31,11 @@ export const basketSlice = createSlice({
     });
 
     builder.addCase(addProductToBasketThunk.fulfilled, (state, action) => {
+      state.cart.lineItems = action.payload.lineItems;
+      state.cart.version = action.payload.version;
+    });
+
+    builder.addCase(removeProductInBasketThunk.fulfilled, (state, action) => {
       state.cart.lineItems = action.payload.lineItems;
       state.cart.version = action.payload.version;
     });
