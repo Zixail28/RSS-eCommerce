@@ -169,9 +169,6 @@ const Profile: FC = () => {
     addressId: string,
     formData: FormAddressValues,
   ) => {
-    console.log("Address ID:", addressId);
-    console.log("Address Data:", formData);
-
     const {
       defaultShippingAddressId,
       defaultBillingAddressId,
@@ -220,7 +217,6 @@ const Profile: FC = () => {
       newShippingAddress,
       newBillingAddress,
     } = data;
-    console.log(data);
 
     await dispatch(
       addNewAddress({

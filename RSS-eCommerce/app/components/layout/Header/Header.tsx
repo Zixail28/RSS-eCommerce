@@ -19,6 +19,7 @@ const Header: FC<{ classes: string }> = ({ classes }) => {
   const navigate = useNavigate();
 
   const { isAuth } = useAppSelector((state) => state.auth);
+  const { lineItems } = useAppSelector((state) => state.basket.cart);
 
   const handleClick = () => {
     dispatch(clearAuthState());
@@ -71,7 +72,9 @@ const Header: FC<{ classes: string }> = ({ classes }) => {
             <span className={styles.wishlist}></span>
           </Link>
           <Link to="/cart">
-            <span className={styles.cart}></span>
+            <span className={styles.cart}>
+              <div>{lineItems.length}</div>
+            </span>
           </Link>
           <Link to="/user">
             <span className={styles.user}></span>
