@@ -3,11 +3,17 @@ import styles from "./CartSection.module.scss";
 import Quantity from "../../../../components/Quantity/Quantity";
 
 const CartSection: FC<{ columns: ReactNode[] }> = ({ columns }) => {
-  const [product, price, quantity, subtotal] = columns;
+  const [product, price, quantity, subtotal, image] = columns;
   return (
     <div className={styles.cartSection}>
-      <p>{product}</p>
-      <p>{price}</p>
+      <div>
+        <div
+          className={styles.image}
+          style={{ backgroundImage: `url(${image})` }}
+        />
+        <p>{product}</p>
+      </div>
+      <p>{typeof quantity === "number" ? `$${price}` : price}</p>
       <p>
         {typeof quantity === "number" ? (
           <Quantity amount={quantity} />
@@ -15,7 +21,7 @@ const CartSection: FC<{ columns: ReactNode[] }> = ({ columns }) => {
           quantity
         )}
       </p>
-      <p>{typeof quantity === "number" ? subtotal : subtotal}</p>
+      <p>{typeof quantity === "number" ? `$${subtotal}` : subtotal}</p>
     </div>
   );
 };

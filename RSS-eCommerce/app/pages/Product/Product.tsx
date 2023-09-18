@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Button from "../../components/ui/Button/Button";
 import PhotoModal from "./PhotoModal/PhotoModal";
@@ -7,17 +7,20 @@ import freeDelivery from "../../assets/images/freeDelivery.svg";
 import returnDelivery from "../../assets/images/returnDelivery.svg";
 import styles from "./Product.module.scss";
 import { productsListServer } from "../../data/users.data";
-import { useAppDispatch } from "../../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { fetchProduct } from "../../services/products/productThunk";
 import { addProductToBasketThunk } from "../../services/basket/addProductToBusket";
 
 const Product = () => {
   const { productName, productId } = useParams();
+  const navigate = useNavigate();
+
   const product = productsListServer.find(
     (product) => product.name === productName,
   );
 
   const dispatch = useAppDispatch();
+  const { lineItems } = useAppSelector((state) => state.basket.cart);
 
   const [currentImage, setCurrentImage] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
@@ -41,8 +44,6 @@ const Product = () => {
   const [price, setPrice] = useState<string>("");
   const [priceOld, setPriceOld] = useState<string>("");
   const [images, setImages] = useState<string[]>([]);
-
-  console.log(productId?.split("=")[1]);
 
   useEffect(() => {
     if (productId) {
@@ -88,7 +89,6 @@ const Product = () => {
   }, [product]);
 
   const handleClick = async () => {
-    console.log(product);
     await dispatch(addProductToBasketThunk(productId as string));
   };
 
@@ -113,6 +113,33 @@ const Product = () => {
   if (!product) {
     return <div>Product not found</div>;
   }
+
+  const renderBtn = () => {
+    if (
+      lineItems.find((item) => item.productId === productId?.split("=")[1]) ===
+      undefined
+    ) {
+      return (
+        <Button type="button" onClick={handleClick}>
+          Add to cart
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          type="button"
+          onClick={() => navigate("/cart")}
+          styles={{
+            background: "#fff",
+            color: "#db4444",
+            border: "1px solid #db4444",
+          }}
+        >
+          Already in cart
+        </Button>
+      );
+    }
+  };
 
   return (
     <section className={styles.wrapper}>
@@ -206,10 +233,7 @@ const Product = () => {
                 +
               </button>
             </div>
-
-            <Button type="button" onClick={handleClick}>
-              Add to cart
-            </Button>
+            {renderBtn()}
             <span className={styles.cart}></span>
           </div>
 
