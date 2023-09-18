@@ -1,6 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { createBasketThunk } from "../basket/createBasketThunk";
+import { changeTaxBasketThunk } from "../basket/changeTaxBasketThunk";
 
 const AUTH_BASE_URL = import.meta.env.VITE_AUTH_URL;
 const API_BASE_URL = import.meta.env.VITE_API_URL;
@@ -32,14 +34,17 @@ export const authenticate = createAsyncThunk<
         },
       },
     );
-
+    const basket = (await thunkAPI.dispatch(createBasketThunk())).payload;
+    await thunkAPI.dispatch(
+      changeTaxBasketThunk({ id: basket.id, version: basket.version }),
+    );
     const response = await axios.post(
       `${API_BASE_URL}/${PROJECT_KEY}/me/login`,
       {
         email: credentials.email,
         password: credentials.password,
         anonymousCart: {
-          id: "{{cart-id}}",
+          id: basket.id,
           typeId: "cart",
         },
       },
@@ -50,7 +55,6 @@ export const authenticate = createAsyncThunk<
         },
       },
     );
-
     return {
       ...response.data,
       ...tokenData.data,

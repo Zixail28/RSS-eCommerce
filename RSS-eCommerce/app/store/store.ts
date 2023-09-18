@@ -10,6 +10,7 @@ import { productsSlice } from "../features/productsSlice";
 import { searchProductsSlice } from "../features/searchProductsSlice";
 import { productSlice } from "../features/productSlice";
 import localStorage from "redux-persist/es/storage";
+import { basketSlice } from "../features/basket/basketSlice";
 
 const persistConfig = {
   key: "root",
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   products: productsSlice.reducer,
   search: searchProductsSlice.reducer,
   product: productSlice.reducer,
+  basket: basketSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

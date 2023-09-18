@@ -8,15 +8,9 @@ const CartMain: FC = () => {
       <CartSection
         columns={["Product", "Price", "Quantity", "Subtotal"]}
       ></CartSection>
-      <CartSection
-        columns={["LCD Monitor", "$650", "ElemQuantity", "$650"]}
-      ></CartSection>
-      <CartSection
-        columns={["LCD Monitor", "$650", "ElemQuantity", "$650"]}
-      ></CartSection>
-      <CartSection
-        columns={["LCD Monitor", "$650", "ElemQuantity", "$650"]}
-      ></CartSection>
+      <CartSection columns={["LCD Monitor", "650", 1, "650"]}></CartSection>
+      <CartSection columns={["LCD Monitor", "650", 3, "650"]}></CartSection>
+      <CartSection columns={["LCD Monitor", "650", 6, "650"]}></CartSection>
     </div>
   );
 };

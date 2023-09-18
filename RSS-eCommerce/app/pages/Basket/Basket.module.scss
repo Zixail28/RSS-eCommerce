@@ -5,11 +5,14 @@
   margin-bottom: 8.75rem;
 }
 
-
 .linksPage {
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
+  a {
+    text-decoration: none;
+    color: rgba($color: #000000, $alpha: 0.5);
+  }
   p {
     margin-left: 1rem;
   }

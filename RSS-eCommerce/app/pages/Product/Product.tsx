@@ -9,6 +9,7 @@ import styles from "./Product.module.scss";
 import { productsListServer } from "../../data/users.data";
 import { useAppDispatch } from "../../hooks/hooks";
 import { fetchProduct } from "../../services/products/productThunk";
+import { addProductToBasketThunk } from "../../services/basket/addProductToBusket";
 
 const Product = () => {
   const { productName, productId } = useParams();
@@ -40,6 +41,8 @@ const Product = () => {
   const [price, setPrice] = useState<string>("");
   const [priceOld, setPriceOld] = useState<string>("");
   const [images, setImages] = useState<string[]>([]);
+
+  console.log(productId?.split("=")[1]);
 
   useEffect(() => {
     if (productId) {
@@ -83,6 +86,11 @@ const Product = () => {
     setSelectedBrand(product?.filter.brand[0] || "");
     setSelectedColor(product?.filter.color[0] || "");
   }, [product]);
+
+  const handleClick = async () => {
+    console.log(product);
+    await dispatch(addProductToBasketThunk(productId as string));
+  };
 
   const incrementQuantity = () => {
     setQuantity(quantity + 1);
@@ -199,7 +207,9 @@ const Product = () => {
               </button>
             </div>
 
-            <Button type="button">Buy now</Button>
+            <Button type="button" onClick={handleClick}>
+              Add to cart
+            </Button>
             <span className={styles.cart}></span>
           </div>
 
