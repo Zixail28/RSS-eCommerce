@@ -7,12 +7,14 @@ const Button: FC<ButtonProps> = ({
   children,
   type = "button",
   color = "red",
+  styles,
 }) => {
   return (
     <button
       type={type}
       color={color}
       className={style.button}
+      style={styles}
       onClick={onClick}
     >
       {children}

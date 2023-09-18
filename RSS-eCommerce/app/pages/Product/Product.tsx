@@ -7,19 +7,23 @@ import freeDelivery from "../../assets/images/freeDelivery.svg";
 import returnDelivery from "../../assets/images/returnDelivery.svg";
 import styles from "./Product.module.scss";
 import { productsListServer } from "../../data/users.data";
-import { useAppDispatch } from "../../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { fetchProduct } from "../../services/products/productThunk";
+import { addProductToBasketThunk } from "../../services/basket/addProductToBusket";
+import { removeProductInBasketThunk } from "../../services/basket/removeProductInBasket";
 
 const Product = () => {
   const { productName, productId } = useParams();
+
   const product = productsListServer.find(
     (product) => product.name === productName,
   );
 
   const dispatch = useAppDispatch();
+  const { lineItems } = useAppSelector((state) => state.basket.cart);
 
   const [currentImage, setCurrentImage] = useState<string>("");
-  const [quantity, setQuantity] = useState<number>(1);
+  //const [quantity, setQuantity] = useState<number>(1);
   const [selectedBrand, setSelectedBrand] = useState<string>(
     product?.filter.brand[0] || "",
   );
@@ -84,15 +88,26 @@ const Product = () => {
     setSelectedColor(product?.filter.color[0] || "");
   }, [product]);
 
-  const incrementQuantity = () => {
-    setQuantity(quantity + 1);
+  const handleAddClick = async () => {
+    await dispatch(addProductToBasketThunk(productId as string));
   };
 
-  const decrementQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
+  const handleRemoveClick = async () => {
+    const lineItemId = lineItems.find(
+      (line) => line.productId == productId?.split("=")[1],
+    ).id;
+    await dispatch(removeProductInBasketThunk(lineItemId as string));
   };
+
+  // const incrementQuantity = () => {
+  //   setQuantity(quantity + 1);
+  // };
+
+  // const decrementQuantity = () => {
+  //   if (quantity > 1) {
+  //     setQuantity(quantity - 1);
+  //   }
+  // };
 
   const handleBrandChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedBrand(event.target.value);
@@ -105,6 +120,34 @@ const Product = () => {
   if (!product) {
     return <div>Product not found</div>;
   }
+
+  const renderBtn = () => {
+    if (
+      lineItems.find((item) => item.productId === productId?.split("=")[1]) ===
+      undefined
+    ) {
+      return (
+        <Button type="button" onClick={handleAddClick}>
+          Add to cart
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          type="button"
+          onClick={handleRemoveClick}
+          styles={{
+            background: "#fff",
+            color: "#db4444",
+            border: "1px solid #db4444",
+            fontSize: ".95rem",
+          }}
+        >
+          Remove from Cart
+        </Button>
+      );
+    }
+  };
 
   return (
     <section className={styles.wrapper}>
@@ -183,7 +226,7 @@ const Product = () => {
           <div className={styles.block}></div>
 
           <div className={styles.actions}>
-            <div className={styles.quantity}>
+            {/* <div className={styles.quantity}>
               <button
                 className={styles.minusQuantity}
                 onClick={decrementQuantity}
@@ -197,9 +240,8 @@ const Product = () => {
               >
                 +
               </button>
-            </div>
-
-            <Button type="button">Buy now</Button>
+            </div> */}
+            {renderBtn()}
             <span className={styles.cart}></span>
           </div>
 

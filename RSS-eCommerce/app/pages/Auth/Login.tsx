@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { FC, useEffect } from "react";
 import Input from "../../components/ui/Input/Input";
 import Button from "../../components/ui/Button/Button";
@@ -11,6 +12,7 @@ import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { validateEmail } from "../../utils/validate/validateEmail";
 import { validatePassword } from "../../utils/validate/validatePassword";
 import { Link } from "react-router-dom";
+import { checkExistBasketThunk } from "../../services/basket/checkExistBasketThunk";
 
 interface LoginForm {
   email: string;
@@ -41,6 +43,7 @@ const Login: FC = () => {
     const { email, password } = data;
 
     await dispatch(authenticate({ email, password }));
+    await dispatch(checkExistBasketThunk());
   };
 
   return (

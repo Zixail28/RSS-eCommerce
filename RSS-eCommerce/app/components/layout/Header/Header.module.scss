@@ -47,6 +47,20 @@
 
 .cart {
   background-image: url(../../../assets/images/cart.svg);
+
+  div {
+    color: #fff;
+    background-color: red;
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 125%;
+    position: relative;
+    left: .8rem;
+    top: -.1rem;
+    text-decoration: none;
+  }
 }
 
 .user {
@@ -72,7 +86,7 @@
   cursor: pointer;
 }
 
-@media (max-width: 910px) {
+@media (max-width: 1120px) {
   .header {
     flex-wrap: wrap;
   }

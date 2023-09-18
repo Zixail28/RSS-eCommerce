@@ -5,4 +5,5 @@ export interface ButtonProps {
   color?: "red" | "blue" | "green";
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children: ReactNode;
+  styles?: React.CSSProperties;
 }
